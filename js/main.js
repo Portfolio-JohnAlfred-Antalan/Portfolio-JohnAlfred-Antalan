@@ -156,3 +156,21 @@ $(window).load(function(){
   });
 
 })
+
+$(document).ready(function () {
+  // Initialize Isotope
+  var $portfolioContainer = $('.portfolio-container').isotope({
+    itemSelector: '.portfolio-thumbnail',
+    layoutMode: 'fitRows',
+    filter: '.Highlights_and_Events'// Set the default filter to 'branding' (change as needed)
+  });
+
+  // Portfolio filter button click
+  $('#portfolio-flters li').on('click', function () {
+    $('#portfolio-flters li').removeClass('filter-active');
+    $(this).addClass('filter-active');
+
+    var filterValue = $(this).attr('data-filter');
+    $portfolioContainer.isotope({ filter: filterValue });
+  });
+});
