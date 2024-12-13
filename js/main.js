@@ -79,7 +79,6 @@ $(document).ready(function() {
 
   $(function() {
     typed.typed({
-      //strings: ["John Alfred M. Antalan.", "Designer.", "Developer.", "Freelancer.", "Photographer"],//
       strings: ["John Alfred M. Antalan"],
       typeSpeed: 100,
       loop: true,
@@ -93,14 +92,14 @@ $(document).ready(function() {
 
 
   $('.services-carousel').owlCarousel({
-      autoplay: true,
-      loop: true,
-      margin: 20,
-      dots: true,
-      nav: false,
-      responsiveClass: true,
-      responsive: { 0: { items: 1 }, 768: { items: 2 }, 900: { items: 4 } }
-    });
+    autoplay: true,
+    loop: true,
+    margin: 20,
+    dots: true,
+    nav: false,
+    responsiveClass: true,
+    responsive: { 0: { items: 1 }, 768: { items: 2 }, 900: { items: 4 } }
+  });
 
   // ========================================================================= //
   //  magnificPopup
@@ -156,21 +155,3 @@ $(window).load(function(){
   });
 
 })
-
-$(document).ready(function () {
-  // Initialize Isotope
-  var $portfolioContainer = $('.portfolio-container').isotope({
-    itemSelector: '.portfolio-thumbnail',
-    layoutMode: 'fitRows',
-    filter: '.Highlights_and_Events'// Set the default filter to 'branding' (change as needed)
-  });
-
-  // Portfolio filter button click
-  $('#portfolio-flters li').on('click', function () {
-    $('#portfolio-flters li').removeClass('filter-active');
-    $(this).addClass('filter-active');
-
-    var filterValue = $(this).attr('data-filter');
-    $portfolioContainer.isotope({ filter: filterValue });
-  });
-});
