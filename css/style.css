@@ -171,7 +171,7 @@ p {
   text-align: left;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   flex-direction: column;
 }
 
