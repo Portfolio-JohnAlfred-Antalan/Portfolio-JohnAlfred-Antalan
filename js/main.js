@@ -79,7 +79,7 @@ $(document).ready(function() {
 
   $(function() {
     typed.typed({
-      strings: ["John Alfred M. Antalan"],
+      strings: ["John Alfred"],
       typeSpeed: 100,
       loop: true,
     });
