@@ -38,7 +38,7 @@ h2 {
 }
 
 h4 {
-  color: #faf7f7;
+  color: #FFDA03;
   font-size: 14px;
   font-weight: 600;
 }
@@ -451,4 +451,5 @@ p {
 
 .animate-item:nth-child(3) {
   transition-delay: 0.6s;
+
 }
