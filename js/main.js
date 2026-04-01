@@ -192,39 +192,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ========================================================================= //
-//  Autoplay / Pause on Scroll (Intersection Observer)
+//  FIXED AUTOPLAY LOGIC
 // ========================================================================= //
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Select all your iframes
-    const videos = document.querySelectorAll('iframe');
+  const videoIframes = document.querySelectorAll('.portfolio-video');
 
-    const options = {
-        root: null, // use the viewport
-        rootMargin: '0px',
-        threshold: 0.6 // Trigger when 60% of the video is visible
-    };
+  const observerOptions = {
+    root: null,
+    threshold: 0.5 // Trigger when half the video is visible
+  };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const iframe = entry.target;
-            const src = iframe.src;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const iframe = entry.target;
+      const currentSrc = iframe.src;
 
-            if (entry.isIntersecting) {
-                // When in view: Ensure the URL has autoplay=1
-                if (!src.includes('autoplay=1')) {
-                    iframe.src = src.includes('?') ? src + '&autoplay=1' : src + '?autoplay=1';
-                }
-            } else {
-                // When out of view: Reset the src to stop the video
-                // This is the only reliable way to "pause" a cross-origin iframe
-                iframe.src = src.replace('&autoplay=1', '').replace('?autoplay=1', '');
-            }
-        });
-    }, options);
-
-    videos.forEach(video => {
-        observer.observe(video);
+      if (entry.isIntersecting) {
+        // Only append autoplay if it isn't already there to avoid infinite reloads
+        if (!currentSrc.includes('autoplay=1')) {
+          const connector = currentSrc.includes('?') ? '&' : '?';
+          iframe.src = currentSrc + connector + 'autoplay=1';
+        }
+      } else {
+        // When it leaves the screen, stop the video by removing autoplay
+        if (currentSrc.includes('autoplay=1')) {
+          iframe.src = currentSrc.replace(/[&?]autoplay=1/, '');
+        }
+      }
     });
+  }, observerOptions);
+
+  videoIframes.forEach(video => observer.observe(video));
 });
+
 
