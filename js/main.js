@@ -192,51 +192,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ========================================================================= //
-//  Google Drive Scroll-to-Play (The "Unlock" Method)
+//  Google Drive "Master Autoplay" Fix
 // ========================================================================= //
 
 $(document).ready(function() {
-    let hasInteracted = false;
+    // 1. Find all your portfolio videos
     const videos = document.querySelectorAll('iframe[src*="drive.google.com"]');
 
-    // 1. Detect the first click on the site to "Unlock" autoplay
-    document.addEventListener('click', function() {
-        if (!hasInteracted) {
-            hasInteracted = true;
-            console.log("Autoplay Unlocked");
-            // Check immediately if a video is already on screen
-            checkObserver(); 
-        }
-    }, { once: true });
-
-    // 2. The Intersection Observer Logic
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const iframe = entry.target;
-            const originalSrc = iframe.getAttribute('src');
-
-            if (entry.isIntersecting && hasInteracted) {
-                // Play: Add autoplay=1 if missing
-                if (!originalSrc.includes('autoplay=1')) {
-                    const newSrc = originalSrc.includes('?') 
-                        ? `${originalSrc}&autoplay=1` 
-                        : `${originalSrc}?autoplay=1`;
-                    iframe.src = newSrc;
-                }
-            } else {
-                // Pause: Strip autoplay=1 to stop the video
-                if (originalSrc.includes('autoplay=1')) {
-                    iframe.src = originalSrc.replace(/[&?]autoplay=1/, '');
-                }
+    // 2. This function forces all videos to start
+    function playAllVideos() {
+        videos.forEach(iframe => {
+            let src = iframe.src;
+            // Only add autoplay if it's not already there
+            if (src.indexOf('autoplay=1') === -1) {
+                iframe.src = src.indexOf('?') !== -1 ? src + '&autoplay=1' : src + '?autoplay=1';
             }
         });
-    }, { threshold: 0.5 }); // Trigger when half the video is visible
-
-    function checkObserver() {
-        videos.forEach(v => observer.observe(v));
+        console.log("All videos triggered!");
     }
 
-    checkObserver();
+    // 3. THE KEY: Wait for the user to click ANYWHERE on the page.
+    // This "unlocks" the browser's permission to play videos.
+    document.addEventListener('click', function() {
+        playAllVideos();
+    }, { once: true }); // Only runs on the first click
 });
-
 
