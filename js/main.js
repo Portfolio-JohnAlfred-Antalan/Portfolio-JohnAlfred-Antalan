@@ -192,39 +192,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ========================================================================= //
-//  SMOOTH VIDEO LOADER
+//  Autoplay/Pause Videos on Scroll
 // ========================================================================= //
-document.addEventListener('DOMContentLoaded', function() {
-  const videoIframes = document.querySelectorAll('.portfolio-video');
 
-  const observerOptions = {
-    root: null,
-    threshold: 0.3 // Trigger when 30% of the video is visible
+document.addEventListener('DOMContentLoaded', function () {
+  const videoIframes = document.querySelectorAll('.embed-responsive-item');
+
+  const options = {
+    root: null, // use the viewport
+    threshold: 0.6 // 60% of the video must be visible to play
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const iframe = entry.target;
-      const targetSrc = iframe.getAttribute('data-src');
+      let src = iframe.src;
 
       if (entry.isIntersecting) {
-        // Only set the SRC if it's empty or hasn't loaded yet
-        if (!iframe.src || iframe.src === "") {
-          // Force Muted Autoplay to satisfy browser policies
-          const videoUrl = targetSrc.includes('?') 
-            ? `${targetSrc}&autoplay=1&mute=1` 
-            : `${targetSrc}?autoplay=1&mute=1`;
-          
-          iframe.src = videoUrl;
+        // Play: Add autoplay parameter if not present
+        if (src.indexOf('autoplay=1') === -1) {
+          iframe.src = src.indexOf('?') !== -1 ? `${src}&autoplay=1` : `${src}?autoplay=1`;
         }
       } else {
-        // OPTIONAL: To stop videos when scrolling away, uncomment below.
-        // Warning: This will cause "reloading" when you scroll back.
-        // iframe.src = ""; 
+        // Pause: Remove autoplay parameter
+        if (src.indexOf('autoplay=1') !== -1) {
+          iframe.src = src.replace(/[&?]autoplay=1/, '');
+        }
       }
     });
-  }, observerOptions);
+  }, options);
 
   videoIframes.forEach(video => observer.observe(video));
 });
+
 
