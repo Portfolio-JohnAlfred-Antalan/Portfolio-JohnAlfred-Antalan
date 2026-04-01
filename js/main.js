@@ -192,38 +192,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ========================================================================= //
-//  Google Drive Scroll-to-Play 
+//  Google Drive Scroll-to-Play (The "Unlock" Method)
 // ========================================================================= //
 
-document.addEventListener('DOMContentLoaded', function () {
-  const videoIframes = document.querySelectorAll('iframe[src*="drive.google.com"]');
-  let userInteracted = false;
+$(document).ready(function() {
+    let hasInteracted = false;
+    const videos = document.querySelectorAll('iframe[src*="drive.google.com"]');
 
-  // 1. Detect first user interaction to bypass browser autoplay blocks
-  window.addEventListener('click', () => {
-    userInteracted = true;
-  }, { once: true });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const iframe = entry.target;
-      let src = iframe.src;
-
-      // Only attempt autoplay if the user has clicked at least once on the site
-      if (entry.isIntersecting && userInteracted) {
-        if (src.indexOf('autoplay=1') === -1) {
-          // Add autoplay=1 to the URL to force the Drive player to start
-          iframe.src = src.indexOf('?') !== -1 ? `${src}&autoplay=1` : `${src}?autoplay=1`;
+    // 1. Detect the first click on the site to "Unlock" autoplay
+    document.addEventListener('click', function() {
+        if (!hasInteracted) {
+            hasInteracted = true;
+            console.log("Autoplay Unlocked");
+            // Check immediately if a video is already on screen
+            checkObserver(); 
         }
-      } else {
-        // Remove autoplay when scrolled away to "pause" (reloads the frame)
-        if (src.indexOf('autoplay=1') !== -1) {
-          iframe.src = src.replace(/[&?]autoplay=1/, '');
-        }
-      }
-    });
-  }, { threshold: 0.5 }); // Trigger when 50% of the video is visible
+    }, { once: true });
 
-  videoIframes.forEach(video => observer.observe(video));
+    // 2. The Intersection Observer Logic
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const iframe = entry.target;
+            const originalSrc = iframe.getAttribute('src');
+
+            if (entry.isIntersecting && hasInteracted) {
+                // Play: Add autoplay=1 if missing
+                if (!originalSrc.includes('autoplay=1')) {
+                    const newSrc = originalSrc.includes('?') 
+                        ? `${originalSrc}&autoplay=1` 
+                        : `${originalSrc}?autoplay=1`;
+                    iframe.src = newSrc;
+                }
+            } else {
+                // Pause: Strip autoplay=1 to stop the video
+                if (originalSrc.includes('autoplay=1')) {
+                    iframe.src = originalSrc.replace(/[&?]autoplay=1/, '');
+                }
+            }
+        });
+    }, { threshold: 0.5 }); // Trigger when half the video is visible
+
+    function checkObserver() {
+        videos.forEach(v => observer.observe(v));
+    }
+
+    checkObserver();
 });
+
 
