@@ -185,7 +185,7 @@ p {
   font-weight: 700;
   margin-bottom: 10px;
   text-transform: uppercase;
-  color: #f28507;
+  color: #fcac33;
 }
 
 .header-content p {
@@ -208,29 +208,43 @@ p {
   font-size: 15px;
 }
 
+/*Simple Fade in starting state */
+[data-animation = "fade"] {
+  opacity: 0;
+  transform: translateY(-25px);
+  transition: opacity 1.2s ease-out;
+  transform: 1.2s ease-out;
+}
+/*Active state triggered by js*/
+[data-animation ="fade"].active {
+  opacity: 1;
+  transform: translateY(0)
+}
 /*-----------------------------------------------------------------------------------*/
 /*  About-us
 /*-----------------------------------------------------------------------------------*/
 
-#about {
+#about {/* whole about section*/
   width: 100%;
   height: auto;
   background: #000000;
   padding-top: 100px;
   padding-bottom: 60px;
+} 
+
+#about .div-img-bg {/* image*/
+  padding-bottom: 10px;
+  margin-top: 0px;
+  margin-left: -9px;
+  border: 10px solid #4c4e2910;
+  border-radius: 20px; /* Softens the sharp edges*/
 }
 
-#about .div-img-bg {
-  padding-bottom: 30px;
-  border: 20px solid #031b31;
-}
-
-#about .div-img-bg .about-img img {
+#about .div-img-bg .about-img img {/* box*/
   width: 100%;
-  box-shadow: 0px 0px 85px 0px rgba(0, 0, 0, 0.14);
-  margin-top: -60px;
-  margin-left: 40px;
-  height: 400px;
+  margin-top: -30px;
+  margin-left: 20px;
+  height: auto;
   object-fit: cover;
 }
 
@@ -246,12 +260,69 @@ p {
   text-align: left;
 }
 
+
+
+/* --- About Section Polish --- */
+
+/* Make the name stand out like a movie title */
+.about-title {
+  font-family: 'Playfair Display', serif;
+  font-size:44px !important;
+  font-weight: 700;
+  color: #faea0c !important; /* Signature Yellow */
+  
+  margin-bottom: 15px !important;
+  letter-spacing: 1px;
+}
+
+/* Fix the "boring" and "overlap" issues */
+.about-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 27px !important;
+  line-height: 1 !important; /* Extra breathing room between lines */
+  color: #e0e0e0 !important;   /* Clean off-white */
+  text-align: justify;
+  letter-spacing: 0.01em;
+  font-weight: 300;
+}
+
+/* Fix the "boring" and "overlap" issues */
+.about-text {
+  font-size: 24px !important;
+  line-height: 2.1 !important; /* Extra breathing room between lines */
+  color: #e0e0e0 !important;   /* Clean off-white */
+  text-align: justify;
+  letter-spacing: 0.03em;
+  font-weight: 300;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 38px !important;
+    
+  }
+  .about-text {
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+  }
+}
+
+
+/* about me image round edges */
+#about .about-img img {
+  border-radius: 8px; /* Softens the sharp edges */
+  box-shadow: 0 0px 60px rgba(255, 146, 4, 0.281); /* Adds depth so the image doesn't look "flat" */
+}
+
+
+
 /*-----------------------------------------------------------------------------------*/
 /*   Services
 /*-----------------------------------------------------------------------------------*/
 
 #services {
-  background: #31373b;
+  background: #333d41;
   position: relative;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -318,7 +389,7 @@ p {
 }
 
 .services-carousel .owl-dot.active {
-  background-color: #b8a07e;
+  background-color: #498506;
 }
 
 .owl-nav {
@@ -454,6 +525,34 @@ p {
 
 }
 
+
+/* --- Portfolio Button Hover & Glow Effects --- */
+
+/* 1. Target the button and ensure the transition is forced */
+#portfolio .portfolio-filter-button {
+  transition: all 0.3s ease-in-out !important;
+  background-color: transparent; /* Starting state */
+  border: 1px solid #FFDA03 !important; /* Matches your yellow theme */
+  color: #f0e4e4 !important;
+}
+
+/* 2. The Hover State with Blue Glow */
+#portfolio .portfolio-filter-button:hover {
+  background-color: #007bff !important; /* Professional Blue */
+  color: #ffffff !important;
+  border-color: #007bff !important;
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.8) !important; /* The Glow */
+  transform: translateY(-3px); /* Lifts the button */
+  cursor: pointer;
+}
+
+/* 3. The Active/Selected State */
+#portfolio .portfolio-filter-button.active {
+  background-color: #007bff !important;
+  color: #ffffff !important;
+  border-color: #007bff !important;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5) !important;
+}
 
 
 
