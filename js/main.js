@@ -79,8 +79,8 @@ $(document).ready(function() {
 
   $(function() {
     typed.typed({
-      strings: ["John Alfred"],
-      typeSpeed: 100,
+      strings: ["John Alfred "],
+      typeSpeed: 70,
       loop: true,
     });
   });
@@ -92,8 +92,8 @@ $(document).ready(function() {
 
 
   $('.services-carousel').owlCarousel({
-    autoplay: true,
-    loop: true,
+    autoplay: false,
+    loop: false,
     margin: 20,
     dots: true,
     nav: false,
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-    const triggerBottom = window.innerHeight * 0.85;
+    const triggerBottom = window.innerHeight * 0.65;
 
     animatedItems.forEach(item => {
       const itemTop = item.getBoundingClientRect().top;
@@ -176,7 +176,55 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+  //Header animation: trigger immediately without scrolling//
+  const HeaderTitles = document.querySelector('.header-content p');
+    if(HeaderTitles){
+   HeaderTitles.classList.add('animate-item');}
+   HeaderTitles.setAttribute('data-animation', 'fade');
+   //small delay starts loading//
+   setTimeout(() =>{
+    HeaderTitles.classList.add('active')}, 500);
+
 
   window.addEventListener('scroll', checkScroll);
   checkScroll(); // Run once to check items already in view
 });
+
+
+// ========================================================================= //
+//  Autoplay / Pause on Scroll (Intersection Observer)
+// ========================================================================= //
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all your iframes
+    const videos = document.querySelectorAll('iframe');
+
+    const options = {
+        root: null, // use the viewport
+        rootMargin: '0px',
+        threshold: 0.6 // Trigger when 60% of the video is visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const iframe = entry.target;
+            const src = iframe.src;
+
+            if (entry.isIntersecting) {
+                // When in view: Ensure the URL has autoplay=1
+                if (!src.includes('autoplay=1')) {
+                    iframe.src = src.includes('?') ? src + '&autoplay=1' : src + '?autoplay=1';
+                }
+            } else {
+                // When out of view: Reset the src to stop the video
+                // This is the only reliable way to "pause" a cross-origin iframe
+                iframe.src = src.replace('&autoplay=1', '').replace('?autoplay=1', '');
+            }
+        });
+    }, options);
+
+    videos.forEach(video => {
+        observer.observe(video);
+    });
+});
+
