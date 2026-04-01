@@ -192,37 +192,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ========================================================================= //
-//  FIXED AUTOPLAY LOGIC
+//  SMOOTH VIDEO LOADER
 // ========================================================================= //
 document.addEventListener('DOMContentLoaded', function() {
   const videoIframes = document.querySelectorAll('.portfolio-video');
 
   const observerOptions = {
     root: null,
-    threshold: 0.5 // Trigger when half the video is visible
+    threshold: 0.3 // Trigger when 30% of the video is visible
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const iframe = entry.target;
-      const currentSrc = iframe.src;
+      const targetSrc = iframe.getAttribute('data-src');
 
       if (entry.isIntersecting) {
-        // Only append autoplay if it isn't already there to avoid infinite reloads
-        if (!currentSrc.includes('autoplay=1')) {
-          const connector = currentSrc.includes('?') ? '&' : '?';
-          iframe.src = currentSrc + connector + 'autoplay=1';
+        // Only set the SRC if it's empty or hasn't loaded yet
+        if (!iframe.src || iframe.src === "") {
+          // Force Muted Autoplay to satisfy browser policies
+          const videoUrl = targetSrc.includes('?') 
+            ? `${targetSrc}&autoplay=1&mute=1` 
+            : `${targetSrc}?autoplay=1&mute=1`;
+          
+          iframe.src = videoUrl;
         }
       } else {
-        // When it leaves the screen, stop the video by removing autoplay
-        if (currentSrc.includes('autoplay=1')) {
-          iframe.src = currentSrc.replace(/[&?]autoplay=1/, '');
-        }
+        // OPTIONAL: To stop videos when scrolling away, uncomment below.
+        // Warning: This will cause "reloading" when you scroll back.
+        // iframe.src = ""; 
       }
     });
   }, observerOptions);
 
   videoIframes.forEach(video => observer.observe(video));
 });
-
 
