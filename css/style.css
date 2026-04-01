@@ -340,6 +340,7 @@ p {
 .services-block img {
   height: 50px;
   width: 50px;
+ 
 }
 
 .services-block span {
@@ -556,3 +557,8 @@ p {
 
 
 
+/* Add a subtle animation to your 'Scroll Down' or 'About' button 
+   to encourage that first click that unlocks the video audio */
+.mouse-icon {
+    cursor: pointer;
+}
