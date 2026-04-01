@@ -192,37 +192,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ========================================================================= //
-//  Autoplay/Pause Videos on Scroll
+//  Google Drive Scroll-to-Play 
 // ========================================================================= //
 
 document.addEventListener('DOMContentLoaded', function () {
-  const videoIframes = document.querySelectorAll('.embed-responsive-item');
+  const videoIframes = document.querySelectorAll('iframe[src*="drive.google.com"]');
+  let userInteracted = false;
 
-  const options = {
-    root: null, // use the viewport
-    threshold: 0.6 // 60% of the video must be visible to play
-  };
+  // 1. Detect first user interaction to bypass browser autoplay blocks
+  window.addEventListener('click', () => {
+    userInteracted = true;
+  }, { once: true });
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const iframe = entry.target;
       let src = iframe.src;
 
-      if (entry.isIntersecting) {
-        // Play: Add autoplay parameter if not present
+      // Only attempt autoplay if the user has clicked at least once on the site
+      if (entry.isIntersecting && userInteracted) {
         if (src.indexOf('autoplay=1') === -1) {
+          // Add autoplay=1 to the URL to force the Drive player to start
           iframe.src = src.indexOf('?') !== -1 ? `${src}&autoplay=1` : `${src}?autoplay=1`;
         }
       } else {
-        // Pause: Remove autoplay parameter
+        // Remove autoplay when scrolled away to "pause" (reloads the frame)
         if (src.indexOf('autoplay=1') !== -1) {
           iframe.src = src.replace(/[&?]autoplay=1/, '');
         }
       }
     });
-  }, options);
+  }, { threshold: 0.5 }); // Trigger when 50% of the video is visible
 
   videoIframes.forEach(video => observer.observe(video));
 });
-
 
