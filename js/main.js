@@ -214,29 +214,47 @@ document.addEventListener('DOMContentLoaded', function () {
 //   Google Drive Scroll-to-Play
 // ========================================================================= //
 
-const observer = new IntersectionObserver((entries) => {
+ $(document).ready(function() {
+  const iframes = document.querySelectorAll('.portfolio-video');
+  let hasInteracted = false;
+
+  function stopAll() {
+    iframes.forEach(iframe => {
+      if (iframe.src.includes('autoplay=1')) {
+        // Reset to the base preview link to kill sound/loading
+        iframe.src = iframe.src.replace(/[&?]autoplay=1/, '');
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const iframe = entry.target;
       
-      if (hasInteracted) {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.60) {
-          let currentSrc = iframe.src;
-          
-          // Only change the source if it doesn't already have autoplay=1
-          if (!currentSrc.includes('autoplay=1')) {
-            pauseAll(); // Stop any other playing videos
-            
-            // Clean the URL of any existing parameters before adding autoplay
-            let cleanSrc = currentSrc.split('?')[0]; 
-            iframe.src = cleanSrc + "?autoplay=1";
-          }
-        } else {
-          // When scrolling away, reset the source to stop the sound
-          if (iframe.src.includes('autoplay=1')) {
-            iframe.src = iframe.src.replace(/[&?]autoplay=1/, '');
-          }
+      if (hasInteracted && entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        const currentSrc = iframe.src;
+        if (!currentSrc.includes('autoplay=1')) {
+          stopAll();
+          // Force a clean URL update
+          const baseSrc = currentSrc.split('?')[0];
+          iframe.src = baseSrc + "?autoplay=1";
         }
       }
     });
-  }, { threshold: [0.60] });
+  }, { threshold: 0.5 });
 
+  iframes.forEach(iframe => observer.observe(iframe));
+
+  // The Big Trigger
+  $('#start-overlay').on('click', function() {
+    hasInteracted = true;
+    $(this).fadeOut(500);
+    
+    // Resume audio context for Chrome/Safari
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtx.resume();
+
+    // Force the browser to recognize the first video
+    setTimeout(() => { window.dispatchEvent(new Event('scroll')); }, 100);
+  });
+});
