@@ -191,6 +191,26 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+
+// ========================================================================= //
+//   overlay click
+// ========================================================================= //
+
+
+$('#start-overlay').on('click', function() {
+  hasInteracted = true;
+  $(this).fadeOut(500);
+  
+  // This "primes" the browser to allow audio from this domain
+  const silentContext = new (window.AudioContext || window.webkitAudioContext)();
+  silentContext.resume();
+
+  // Manually trigger the observer for the first visible video
+  checkIframesInView(); 
+});
+
+
 // ========================================================================= //
 //   Google Drive Scroll-to-Play
 // ========================================================================= //
