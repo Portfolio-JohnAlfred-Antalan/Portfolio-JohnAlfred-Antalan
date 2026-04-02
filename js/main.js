@@ -198,72 +198,45 @@ document.addEventListener('DOMContentLoaded', function () {
 // ========================================================================= //
 
 
-$('#start-overlay').on('click', function() {
-  hasInteracted = true;
-  $(this).fadeOut(500);
-  
-  // This "primes" the browser to allow audio from this domain
-  const silentContext = new (window.AudioContext || window.webkitAudioContext)();
-  silentContext.resume();
+  $('#start-overlay').on('click', function() {
+    hasInteracted = true;
+    $(this).fadeOut(500);
+    
+    // This forces the browser to run the "check" immediately 
+    // so the first video starts without needing a scroll.
+    window.dispatchEvent(new Event('scroll'));
+  });
 
-  // Manually trigger the observer for the first visible video
-  checkIframesInView(); 
-});
+
 
 
 // ========================================================================= //
 //   Google Drive Scroll-to-Play
 // ========================================================================= //
 
-$(document).ready(function() {
-  const iframes = document.querySelectorAll('iframe[src*="drive.google.com"]');
-  let hasInteracted = false;
-
-  // 1. Function to stop all videos (cleans up overlapping audio)
-  function pauseAll() {
-    iframes.forEach(iframe => {
-      if (iframe.src.includes('autoplay=1')) {
-        iframe.src = iframe.src.replace(/[&?]autoplay=1/, '');
-      }
-    });
-  }
-
-  // 2. High-Precision Scroll Watcher
-  const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const iframe = entry.target;
       
-      // Only act if the user has clicked "Enter"
       if (hasInteracted) {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.60 && entry.intersectionRatio > -.80){
-          pauseAll(); // Kill others
-          
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.60) {
           let currentSrc = iframe.src;
-          // Add autoplay to the one we are looking at
+          
+          // Only change the source if it doesn't already have autoplay=1
           if (!currentSrc.includes('autoplay=1')) {
-            iframe.src = currentSrc.includes('?') ? `${currentSrc}&autoplay=1` : `${currentSrc}?autoplay=1`;
+            pauseAll(); // Stop any other playing videos
+            
+            // Clean the URL of any existing parameters before adding autoplay
+            let cleanSrc = currentSrc.split('?')[0]; 
+            iframe.src = cleanSrc + "?autoplay=1";
           }
         } else {
-          // Remove autoplay when scrolled away to stop the sound
+          // When scrolling away, reset the source to stop the sound
           if (iframe.src.includes('autoplay=1')) {
             iframe.src = iframe.src.replace(/[&?]autoplay=1/, '');
           }
         }
       }
     });
-  }, { threshold: [0, 0.60] });
-
-  iframes.forEach(iframe => observer.observe(iframe));
-
-  // 3. THE TRIGGER (The "Click to Enter" fix)
-  $('#start-overlay').on('click', function() {
-    hasInteracted = true;
-    $(this).fadeOut(500); // Hide the splash screen
-    
-    console.log("Global Interaction Recorded - Videos Primed");
-
-    // Force a scroll check immediately
-    window.dispatchEvent(new Event('scroll'));
-  });
-});
+  }, { threshold: [0.60] });
 
