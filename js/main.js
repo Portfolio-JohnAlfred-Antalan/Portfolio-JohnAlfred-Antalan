@@ -191,70 +191,59 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-// ========================================================================= //
-//   overlay click
-// ========================================================================= //
-
-
-  $('#start-overlay').on('click', function() {
-    hasInteracted = true;
-    $(this).fadeOut(500);
-    
-    // This forces the browser to run the "check" immediately 
-    // so the first video starts without needing a scroll.
-    window.dispatchEvent(new Event('scroll'));
-  });
-
-
-
-
 // ========================================================================= //
 //   Google Drive Scroll-to-Play
 // ========================================================================= //
 
- $(document).ready(function() {
-  const iframes = document.querySelectorAll('.portfolio-video');
+$(document).ready(function() {
+  const iframes = document.querySelectorAll('iframe[src*="drive.google.com"]');
   let hasInteracted = false;
 
-  function stopAll() {
+  // 1. Function to stop all videos (cleans up overlapping audio)
+  function pauseAll() {
     iframes.forEach(iframe => {
       if (iframe.src.includes('autoplay=1')) {
-        // Reset to the base preview link to kill sound/loading
         iframe.src = iframe.src.replace(/[&?]autoplay=1/, '');
       }
     });
   }
 
+  // 2. High-Precision Scroll Watcher
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const iframe = entry.target;
       
-      if (hasInteracted && entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-        const currentSrc = iframe.src;
-        if (!currentSrc.includes('autoplay=1')) {
-          stopAll();
-          // Force a clean URL update
-          const baseSrc = currentSrc.split('?')[0];
-          iframe.src = baseSrc + "?autoplay=1";
+      // Only act if the user has clicked "Enter"
+      if (hasInteracted) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.60 && entry.intersectionRatio > -.80){
+          pauseAll(); // Kill others
+          
+          let currentSrc = iframe.src;
+          // Add autoplay to the one we are looking at
+          if (!currentSrc.includes('autoplay=1')) {
+            iframe.src = currentSrc.includes('?') ? `${currentSrc}&autoplay=1` : `${currentSrc}?autoplay=1`;
+          }
+        } else {
+          // Remove autoplay when scrolled away to stop the sound
+          if (iframe.src.includes('autoplay=1')) {
+            iframe.src = iframe.src.replace(/[&?]autoplay=1/, '');
+          }
         }
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: [0, 0.60] });
 
   iframes.forEach(iframe => observer.observe(iframe));
 
-  // The Big Trigger
+  // 3. THE TRIGGER (The "Click to Enter" fix)
   $('#start-overlay').on('click', function() {
     hasInteracted = true;
-    $(this).fadeOut(500);
+    $(this).fadeOut(500); // Hide the splash screen
     
-    // Resume audio context for Chrome/Safari
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    audioCtx.resume();
+    console.log("Global Interaction Recorded - Videos Primed");
 
-    // Force the browser to recognize the first video
-    setTimeout(() => { window.dispatchEvent(new Event('scroll')); }, 100);
+    // Force a scroll check immediately
+    window.dispatchEvent(new Event('scroll'));
   });
 });
+
