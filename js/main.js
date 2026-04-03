@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
 //   Google Drive Scroll-to-Play
 // ========================================================================= //
 
-// ========================================================================= //
+/* // ========================================================================= //
 //   FIXED Google Drive Scroll-to-Play (Anti-Loop Version)
 // ========================================================================= //
 
@@ -264,3 +264,56 @@ $('button[data-toggle="tab"]').on('shown.bs.tab', function () {
     });
     window.dispatchEvent(new Event('scroll'));
 });
+ */
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const iframe = entry.target;
+    
+    if (hasInteracted && iframe.offsetParent !== null) {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.75) {
+        
+        // EXIT if this video is already marked as playing to stop the loading loop
+        if (iframe.getAttribute('data-status') === 'playing') return;
+
+        // Reset other videos so only ONE is loading at a time
+        iframes.forEach(other => {
+            if(other !== iframe && other.getAttribute('data-status') === 'playing') {
+                other.src = other.src.replace(/[&?]autoplay=1/, '&autoplay=0');
+                other.setAttribute('data-status', 'paused');
+            }
+        });
+
+        // Trigger the play
+        let currentSrc = iframe.src;
+        if (!currentSrc.includes('autoplay=1')) {
+          const base = currentSrc.split('?')[0];
+          // We add a 't' timestamp to force a fresh, non-cached request from Google
+          iframe.src = `${base}?autoplay=1&mute=1&rel=0&t=${new Date().getTime()}`; 
+          iframe.setAttribute('data-status', 'playing');
+        }
+      } 
+    }
+  });
+}, { threshold: 0.75 });
+
+
+
+
+
+// This wakes up the video source only when it's about to be seen
+const lazyLoad = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const vid = entry.target;
+      if (vid.src === "about:blank") {
+        vid.src = vid.getAttribute('data-src');
+      }
+    }
+  });
+}, { rootMargin: "200px" }); // Start loading when it's 200px away
+
+iframes.forEach(vid => lazyLoad.observe(vid));
+
+
+
