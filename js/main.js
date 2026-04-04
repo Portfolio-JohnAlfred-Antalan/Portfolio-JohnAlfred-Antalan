@@ -166,18 +166,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-  const triggerBottom = window.innerHeight * 0.85;
+    const triggerBottom = window.innerHeight * 0.65;
 
-  animateItems.forEach(item => {
-    const itemTop = item.getBoundingClientRect().top;
+    animatedItems.forEach(item => {
+      const itemTop = item.getBoundingClientRect().top;
 
-    if (itemTop < triggerBottom) {
-      // Just add the class, let CSS handle the direction
-      item.classList.add('active'); 
-    }
-  });
-}
-
+      if (itemTop < triggerBottom) {
+        item.classList.add('active');
+      }
+    });
   }
   //Header animation: trigger immediately without scrolling//
   const HeaderTitles = document.querySelector('.header-content p');
