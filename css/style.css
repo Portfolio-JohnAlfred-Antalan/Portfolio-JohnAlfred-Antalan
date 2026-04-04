@@ -232,25 +232,27 @@ p {
 
 /* 2. Custom distance for the header only (Safer than 70px) */
 .header-content .animate-item {
-  transform: translate3d(0, 40px, 0); 
-  transition: opacity 1.2s ease-out, transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(0, 30px, 0) !important; /* Shorter distance */
+  transition: opacity 1.2s ease-out, transform 1.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 /* 3. Base animation for everything else (Scroll sections) */
 .animate-item {
   opacity: 0;
-  transform: translate3d(0, 70px, 0); 
+  position: relative; /* Keeps it in the flow without pushing others */
+  transform: translate3d(0, 50px, 0); /* Reduced slightly from 70px for stability */
   transition: opacity 1.2s ease-out, transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
   visibility: hidden;
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
 
-/* 4. Land exactly at zero */
-.animate-item.active {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  visibility: visible !important;
+/* Ensure the active state is perfectly reset to remove any gaps */
+.header-content p span.typed {
+  display: inline-block;
+  min-width: 200px; /* Adjust this to match your longest title */
+  text-align: left;
+  vertical-align: middle;
 }
 
 /*-----------------------------------------------------------------------------------*/
