@@ -166,28 +166,36 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-    const triggerBottom = window.innerHeight * 0.65;
+  // Logic from the video: 80% height is best for mobile stability
+  const triggerBottom = window.innerHeight * 0.9; // Trigger earlier (at 90% of screen)
+    
 
-    animatedItems.forEach(item => {
-      const itemTop = item.getBoundingClientRect().top;
+  animatedItems.forEach(item => {
+    const itemTop = item.getBoundingClientRect().top;
 
-      if (itemTop < triggerBottom) {
-        item.classList.add('active');
-      }
-    });
+    // Only trigger if the item is entering the view, don't remove it
+    if (itemTop < triggerBottom) {
+      item.classList.add('active');
+    }
+  });
   }
-  //Header animation: trigger immediately without scrolling//
+  
+    // Header animation: trigger immediately on load
   const HeaderTitles = document.querySelector('.header-content p');
-    if(HeaderTitles){
-   HeaderTitles.classList.add('animate-item');}
-   HeaderTitles.setAttribute('data-animation', 'fade');
-   //small delay starts loading//
-   setTimeout(() =>{
-    HeaderTitles.classList.add('active')}, 500);
-
-
+  if (HeaderTitles) {
+    // Add the class if it's not in the HTML
+    HeaderTitles.classList.add('animate-item');
+    HeaderTitles.setAttribute('data-animation', 'fade');
+    
+    // Trigger after 200ms (faster than 500ms) to sync with Typed.js
+    setTimeout(() => {
+      HeaderTitles.classList.add('active');
+    }, 200); 
+  }
+  
+  
   window.addEventListener('scroll', checkScroll);
-  checkScroll(); // Run once to check items already in view
+  checkScroll(); 
 });
 
 
