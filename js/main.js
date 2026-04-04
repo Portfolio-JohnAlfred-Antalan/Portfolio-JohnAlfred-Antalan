@@ -191,22 +191,27 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Handle Contact Form Submission
+// ========================================================================= //
+//  Contact Form Submission (EmailJS)
+// ========================================================================= //
 $(document).ready(function() {
   $('#contact-form').on('submit', function(event) {
     event.preventDefault();
     
-    // Disable button to prevent double clicks
     const btn = $(this).find('.btn-send');
     btn.val('SENDING...');
 
-    emailjs.sendForm('YOUR_SERVICE_ID', 'template_6jqt3na', this)
+    // Replace with your actual IDs from EmailJS
+    const serviceID = 'service_oissmik';
+    const templateID = 'template_6jqt3na'; // Your current template ID
+
+    emailjs.sendForm(serviceID, templateID, this)
       .then(() => {
-        alert('Message sent! I will get back to you shortly.');
+        alert('Message sent successfully! I will get back to you soon.');
         $('#contact-form')[0].reset();
         btn.val('SEND MESSAGE');
       }, (err) => {
-        alert('Oops! Something went wrong. Please email me directly.');
+        alert('Failed to send. Please check your account keys or email me directly.');
         btn.val('SEND MESSAGE');
       });
   });
