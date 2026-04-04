@@ -492,35 +492,34 @@ p {
 /* Initial hidden state */
 
 /* --- Final Mobile-Safe Animation --- */
+/* --- Updated Animation: 70px Travel & No Blur --- */
 .animate-item {
   opacity: 0;
-  filter: blur(5px);
-  /* Use a small vertical lift instead of horizontal slide to prevent gaps */
-  transform: translate3d(0, 30px, 0); 
-  /* Target specific properties to prevent layout jumping */
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.8s ease-out;
+  /* Start 70px lower for a longer "rise" effect */
+  transform: translate3d(0, 70px, 0); 
+  /* Transition only opacity and transform for mobile stability */
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
   visibility: hidden;
-  /* Keeps the page width locked */
   backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
-/* Slide Left/Right: We reduce the distance to only 20px so it doesn't "squeeze" the layout */
+/* Slide Left: Starting 70px to the left */
 [data-animation="slide-left"] {
-  transform: translate3d(-20px, 10px, 0);
+  transform: translate3d(-70px, 0, 0);
 }
 
+/* Slide Right: Starting 70px to the right */
 [data-animation="slide-right"] {
-  transform: translate3d(20px, 10px, 0);
+  transform: translate3d(70px, 0, 0);
 }
 
-/* Active state: !important ensures the gap disappears once active */
+/* Active state: Returns to exactly 0 */
 .animate-item.active {
   opacity: 1 !important;
-  filter: blur(0) !important;
   transform: translate3d(0, 0, 0) !important;
   visibility: visible !important;
 }
-
 
 
 /* --- Portfolio Button Hover & Glow Effects --- */
