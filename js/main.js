@@ -179,15 +179,20 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   }
   
-  
-  // Header: immediate trigger for the "Video Editor" title
-  const headerText = document.querySelector('.header-content p');
-  if (headerText) {
-    headerText.classList.add('animate-item');
-    headerText.setAttribute('data-animation', 'slide-left'); // Or 'fade'
-    setTimeout(() => headerText.classList.add('active'), 200);
+    // Header animation: trigger immediately on load
+  const HeaderTitles = document.querySelector('.header-content p');
+  if (HeaderTitles) {
+    // Add the class if it's not in the HTML
+    HeaderTitles.classList.add('animate-item');
+    HeaderTitles.setAttribute('data-animation', 'fade');
+    
+    // Trigger after 200ms (faster than 500ms) to sync with Typed.js
+    setTimeout(() => {
+      HeaderTitles.classList.add('active');
+    }, 200); 
   }
-
+  
+  
   window.addEventListener('scroll', checkScroll);
   checkScroll(); 
 });
