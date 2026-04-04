@@ -555,3 +555,62 @@ p {
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.5) !important;
 }
 
+
+/* --- Contact --- */
+/* Contact Form Custom Styling */
+
+#contact { /* bg color */
+  background-color: #2a2a2a ! important;
+  position: relative;
+  z-index: 1;
+}
+
+#contact.paddsection {
+  border-top: 1px solid #333;
+}
+
+.contact-details li{
+  color: #f0e4e4
+}
+
+
+.contactForm .form-control {
+  background: #222;
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 0;
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+
+.contactForm .form-control:focus {
+  background: #222;
+  border-color: #FFDA03; /* Matches your theme yellow */
+  color: #fff;
+  box-shadow: none;
+}
+
+.btn-send {
+  background: #FFDA03;
+  color: #181818;
+  border-radius: 0;
+  padding: 12px 40px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border: 1px solid #FFDA03;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-send:hover {
+  background: transparent;
+  color: #FFDA03;
+}
+
+/* Ensure placeholder text is readable */
+::placeholder {
+  color: #888 !important;
+  opacity: 1;
+}
+
+
