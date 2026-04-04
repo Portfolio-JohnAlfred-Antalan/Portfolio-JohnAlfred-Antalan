@@ -75,8 +75,15 @@ $(document).ready(function() {
   //  Typed Js
   // ========================================================================= //
 
+  var typed = $(".typed");
 
-  
+  $(function() {
+    typed.typed({
+      strings: ["John Alfred "],
+      typeSpeed: 70,
+      loop: true,
+    });
+  });
 
 
   // ========================================================================= //
@@ -159,36 +166,28 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-  // Logic from the video: 80% height is best for mobile stability
-  const triggerBottom = window.innerHeight * 0.9; // Trigger earlier (at 90% of screen)
-    
+    const triggerBottom = window.innerHeight * 0.65;
 
-  animatedItems.forEach(item => {
-    const itemTop = item.getBoundingClientRect().top;
+    animatedItems.forEach(item => {
+      const itemTop = item.getBoundingClientRect().top;
 
-    // Only trigger if the item is entering the view, don't remove it
-    if (itemTop < triggerBottom) {
-      item.classList.add('active');
-    }
-  });
+      if (itemTop < triggerBottom) {
+        item.classList.add('active');
+      }
+    });
   }
-  
-    // Header animation: trigger immediately on load
+  //Header animation: trigger immediately without scrolling//
   const HeaderTitles = document.querySelector('.header-content p');
-  if (HeaderTitles) {
-    // Add the class if it's not in the HTML
-    HeaderTitles.classList.add('animate-item');
-    HeaderTitles.setAttribute('data-animation', 'fade');
-    
-    // Trigger after 200ms (faster than 500ms) to sync with Typed.js
-    setTimeout(() => {
-      HeaderTitles.classList.add('active');
-    }, 200); 
-  }
-  
-  
+    if(HeaderTitles){
+   HeaderTitles.classList.add('animate-item');}
+   HeaderTitles.setAttribute('data-animation', 'fade');
+   //small delay starts loading//
+   setTimeout(() =>{
+    HeaderTitles.classList.add('active')}, 500);
+
+
   window.addEventListener('scroll', checkScroll);
-  checkScroll(); 
+  checkScroll(); // Run once to check items already in view
 });
 
 
