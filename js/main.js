@@ -176,20 +176,19 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-  //Header animation: trigger immediately without scrolling//
-  const HeaderTitles = document.querySelector('.header-content p');
-    if(HeaderTitles){
-   HeaderTitles.classList.add('animate-item');}
-   HeaderTitles.setAttribute('data-animation', 'fade');
-   //small delay starts loading//
-   setTimeout(() =>{
-    HeaderTitles.classList.add('active')}, 500);
 
 
-  window.addEventListener('scroll', checkScroll);
-  checkScroll(); // Run once to check items already in view
-});
-
+    // Header animation: trigger immediately without scrolling
+  const headerText = document.querySelector('.header-content p');
+  if (headerText) {
+    headerText.classList.add('animate-item');
+    headerText.setAttribute('data-animation', 'fade');
+    // Trigger the animation slightly after page load
+    setTimeout(() => {
+      headerText.classList.add('active');
+    }, 200);
+  }
+  
 
 // ========================================================================= //
 //  Contact Form Submission (EmailJS)
