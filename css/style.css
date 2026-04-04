@@ -220,6 +220,39 @@ p {
   opacity: 1;
   transform: translateY(0)
 }
+
+/* --- Header Layout & Animation Fix --- */
+
+/* 1. Prevent Typed.js from moving the header as it types */
+.header-content p span {
+  display: inline-block;
+  min-width: 250px; /* Reserves space so the header stays still */
+  text-align: left;
+}
+
+/* 2. Custom distance for the header only (Safer than 70px) */
+.header-content .animate-item {
+  transform: translate3d(0, 40px, 0); 
+  transition: opacity 1.2s ease-out, transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 3. Base animation for everything else (Scroll sections) */
+.animate-item {
+  opacity: 0;
+  transform: translate3d(0, 70px, 0); 
+  transition: opacity 1.2s ease-out, transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* 4. Land exactly at zero */
+.animate-item.active {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  visibility: visible !important;
+}
+
 /*-----------------------------------------------------------------------------------*/
 /*  About-us
 /*-----------------------------------------------------------------------------------*/
