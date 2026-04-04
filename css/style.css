@@ -557,79 +557,75 @@ p {
 
 
 /* --- Contact --- */
-/* --- Contact Section Modernized --- */
-
-/* --- Contact Section: Visual Hierarchy Fix --- */
-
 #contact {
   background-color: #2a2a2a !important;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 60px; /* Reduced top space to fix the awkward gap */
+  padding-bottom: 80px;
   border-top: 1px solid #333;
 }
 
-/* 1. Improved Title Hierarchy */
+/* Fix 1: Title position and size */
 .section-title h2 {
-  font-size: 40px;      /* Larger title */
-  font-weight: 800;    /* Extra bold */
-  letter-spacing: 3px;
-  margin-bottom: 60px; /* Space between title and content */
+  font-size: 32px;      
+  font-weight: 700;    
+  letter-spacing: 2px;
+  margin-bottom: 40px; /* Brings title closer to the address/form */
   color: #FFDA03;
-  text-transform: uppercase;
+  text-align: center;
 }
 
-/* 2. Content Styling */
-.contactForm .form-group {
-  margin-bottom: 25px;
-}
-
+/* Fix 2: Remove forced Capital Letters from Inputs */
 .contactForm .form-control {
   background: #222;
   border: 1px solid #444;
   color: #fff;
   border-radius: 0;
   padding: 15px;
+  text-transform: none !important; /* This allows small letters/normal typing */
+  height: auto;
 }
 
-.contactForm .form-control:focus {
-  border-color: #FFDA03;
-  box-shadow: none;
+.contactForm .form-group {
+  margin-bottom: 20px;
 }
 
-/* 3. Centered Button & Layout Fix */
+/* Fix 3: Center the text inside the button and center the button itself */
 .btn-send {
   background: #FFDA03 !important;
   color: #181818 !important;
   font-weight: 700;
-  letter-spacing: 1px;
   
-  /* Centering Logic */
-  display: block;
-  margin: 30px auto 0 auto; /* Centers the button horizontally */
-  width: 250px;             /* Fixed width so it's not too long */
+  /* Centering the text vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  /* Centering the button in the section */
+  margin: 30px auto 0 auto; 
+  width: 220px;
+  height: 55px; /* Fixed height for a professional look */
   
   border-radius: 0;
-  padding: 15px 30px;
   border: none;
   transition: all 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase; /* Keeps button text clean/pro */
 }
 
 .btn-send:hover {
   background: #fff !important;
-  transform: translateY(-2px); /* Subtle lift effect */
+  transform: translateY(-2px);
 }
 
-/* Professional Detail Styling */
+/* Address detail styling */
 #contact p {
-  font-size: 16px;
-  line-height: 1.8;
   color: #f0e4e4;
+  margin-bottom: 15px;
 }
 
 #contact p strong {
   color: #FFDA03;
-  font-weight: 600;
-  display: block; /* Puts label above the detail for better hierarchy */
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 1px;
 }
