@@ -161,57 +161,64 @@ p {
 /*-----------------------------------------------------------------------------------*/
 
 #header {
-  background: url("../images/home-bg.jpg") no-repeat center center / cover; /* Using your new image */
+  background: url("../images/home-bg.jpg") repeat scroll center center / cover;
   height: 100vh;
   width: 100%;
-  display: flex;             /* Added to center content */
-  align-items: center;       /* Vertical center */
-  justify-content: center;    /* Horizontal center */
-  text-align: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
 }
 
-/* --- Vertical Scroll Animation --- */
-.scroll-container {
+
+#header .header-content {
+  height: 100vh;
+  text-align: left;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  font-weight: 600;
-  height: 50px; 
-  overflow: hidden;
-}
-
-.static-text {
-  margin-right: 12px;
-  color: #fff;
-}
-
-.scroll-wrapper {
-  height: 50px; 
-  overflow: hidden;
-}
-
-.scroll-items {
-  display: flex;
+  justify-content: flex-end;
   flex-direction: column;
-  /* 6 seconds total: 1.5s per word + 1.5s for the loop reset */
-  animation: scrollUpLoop 6s cubic-bezier(0.76, 0, 0.24, 1) infinite;
 }
 
-.scroll-items span {
-  display: block;
-  height: 50px;
-  line-height: 50px;
-  color: #FFDA03; /* Your theme yellow */
+.header-content h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 10px;
   text-transform: uppercase;
-  white-space: nowrap;
+  color: #fcac33;
 }
 
-@keyframes scrollUpLoop {
-  0%, 10%   { transform: translateY(0); }         /* Video Editor */
-  30%, 40%  { transform: translateY(-50px); }    /* Director */
-  60%, 70%  { transform: translateY(-100px); }   /* Videographer */
-  90%, 100% { transform: translateY(-150px); }   /* Back to Video Editor (Seamless) */
+.header-content p {
+  font-size: 13px;
+  letter-spacing: 5px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  text-transform: capitalize;
+  color: #fff;
+  font-weight: 500;
+}
+
+.header-content .list-social li {
+  float: left;
+  margin-right: 20px;
+}
+
+.header-content .list-social li i {
+  color: #fff;
+  font-size: 15px;
+}
+
+/*Simple Fade in starting state */
+[data-animation = "fade"] {
+  opacity: 0;
+  transform: translateY(-25px);
+  transition: opacity 1.2s ease-out;
+  transform: 1.2s ease-out;
+}
+/*Active state triggered by js*/
+[data-animation ="fade"].active {
+  opacity: 1;
+  transform: translateY(0)
 }
 /*-----------------------------------------------------------------------------------*/
 /*  About-us
