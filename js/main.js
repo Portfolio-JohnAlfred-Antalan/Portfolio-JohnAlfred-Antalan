@@ -191,3 +191,25 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Handle Contact Form Submission
+$(document).ready(function() {
+  $('#contact-form').on('submit', function(event) {
+    event.preventDefault();
+    
+    // Disable button to prevent double clicks
+    const btn = $(this).find('.btn-send');
+    btn.val('SENDING...');
+
+    emailjs.sendForm('YOUR_SERVICE_ID', 'template_6jqt3na', this)
+      .then(() => {
+        alert('Message sent! I will get back to you shortly.');
+        $('#contact-form')[0].reset();
+        btn.val('SEND MESSAGE');
+      }, (err) => {
+        alert('Oops! Something went wrong. Please email me directly.');
+        btn.val('SEND MESSAGE');
+      });
+  });
+});
+
+
