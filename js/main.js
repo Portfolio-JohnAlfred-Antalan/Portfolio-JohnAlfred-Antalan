@@ -166,20 +166,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-  // Logic from the video: 80% of the viewport height
+  // Logic from the video: 80% height is best for mobile stability
   const triggerBottom = window.innerHeight * 0.8;
 
   animatedItems.forEach(item => {
-    // getBoundingClientRect is the most accurate way to detect position
     const itemTop = item.getBoundingClientRect().top;
 
+    // Only trigger if the item is entering the view, don't remove it
     if (itemTop < triggerBottom) {
       item.classList.add('active');
     }
-    // Note: We don't remove 'active' here to prevent it jumping back 
-    // when you scroll back up.
   });
   }
+  
   
   // Header: immediate trigger for the "Video Editor" title
   const headerText = document.querySelector('.header-content p');
