@@ -220,6 +220,39 @@ p {
   opacity: 1;
   transform: translateY(0)
 }
+
+/* --- New Scrolling Animation --- */
+.scrolling-container {
+  height: 30px; /* Adjust based on your font size */
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.scrolling-text {
+  display: flex;
+  flex-direction: column;
+  animation: scrollTitles 9s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  margin: 0 !important; /* Overriding default p margins */
+}
+
+.scrolling-text span {
+  display: block;
+  height: 30px;
+  font-size: 13px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+@keyframes scrollTitles {
+  0%, 20% { transform: translateY(0); }        /* Video Editor */
+  33%, 53% { transform: translateY(-30px); }   /* Videographer */
+  66%, 86% { transform: translateY(-60px); }   /* Director */
+  100% { transform: translateY(0); }           /* Loop back */
+}
+
 /*-----------------------------------------------------------------------------------*/
 /*  About-us
 /*-----------------------------------------------------------------------------------*/
