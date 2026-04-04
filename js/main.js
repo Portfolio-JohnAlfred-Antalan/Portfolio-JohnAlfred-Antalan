@@ -166,21 +166,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-    // The video uses 5 / 4 (0.8), which is perfect for mobile
-    const triggerBottom = window.innerHeight / 5 * 4;
+  // Logic from the video: 80% of the viewport height
+  const triggerBottom = window.innerHeight * 0.8;
 
-    animatedItems.forEach(item => {
-      const itemTop = item.getBoundingClientRect().top;
+  animatedItems.forEach(item => {
+    // getBoundingClientRect is the most accurate way to detect position
+    const itemTop = item.getBoundingClientRect().top;
 
-      if (itemTop < triggerBottom) {
-        item.classList.add('active');
-      } else {
-        // Optional: remove 'active' to animate again when scrolling up
-        // item.classList.remove('active'); 
-      }
-    });
+    if (itemTop < triggerBottom) {
+      item.classList.add('active');
+    }
+    // Note: We don't remove 'active' here to prevent it jumping back 
+    // when you scroll back up.
+  });
   }
-
+  
   // Header: immediate trigger for the "Video Editor" title
   const headerText = document.querySelector('.header-content p');
   if (headerText) {
