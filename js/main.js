@@ -166,8 +166,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-    const triggerBottom = window.innerHeight * 0.65;
-
+    // Using a higher multiplier (0.8) ensures items animate in sooner on mobile
+     const triggerBottom = (window.innerHeight || document.documentElement.clientHeight) * 0.8;
+    
     animatedItems.forEach(item => {
       const itemTop = item.getBoundingClientRect().top;
 
@@ -179,16 +180,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Header animation: trigger immediately without scrolling
+    // Header animation: trigger immediately on load
   const headerText = document.querySelector('.header-content p');
+  
   if (headerText) {
     headerText.classList.add('animate-item');
     headerText.setAttribute('data-animation', 'fade');
-    // Trigger the animation slightly after page load
+    
+    // Tiny delay to ensure the browser registers the starting state
     setTimeout(() => {
       headerText.classList.add('active');
-    }, 200);
+    }, 150);
   }
-  
 
 // ========================================================================= //
 //  Contact Form Submission (EmailJS)
