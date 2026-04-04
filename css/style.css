@@ -490,11 +490,38 @@ p {
 
 
 /* Initial hidden state */
+
+/* --- Optimized Animation Core --- */
 .animate-item {
   opacity: 0;
-  transform: translateY(30px); /* Starts slightly downwards */
-  transition: all 0.8s ease-in-out;
+  /* Using translate3d prevents the "jump" at the end of the animation */
+  transform: translate3d(0, 30px, 0); 
+  /* Only transition opacity and transform to avoid layout jitters */
+  transition: opacity 0.8s cubic-bezier(0.2, 1, 0.3, 1), transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  backface-visibility: hidden;
+  pointer-events: none; /* Prevents clicking items before they appear */
 }
+
+[data-animation="slide-left"] {
+  transform: translate3d(-100px, 0, 0);
+}
+
+[data-animation="slide-right"] {
+  transform: translate3d(100px, 0, 0);
+}
+
+/* Active state resets to natural position */
+.animate-item.active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+}
+
+/* Staggered timing */
+.animate-item:nth-child(1) { transition-delay: 0.1s; }
+.animate-item:nth-child(2) { transition-delay: 0.2s; }
+.animate-item:nth-child(3) { transition-delay: 0.3s; }
+
 
 /* Slide from left */
 [data-animation="slide-left"] {
