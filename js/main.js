@@ -166,9 +166,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-    // Using a higher multiplier (0.8) ensures items animate in sooner on mobile
-     const triggerBottom = (window.innerHeight || document.documentElement.clientHeight) * 0.8;
-    
+    const triggerBottom = window.innerHeight * 0.65;
+
     animatedItems.forEach(item => {
       const itemTop = item.getBoundingClientRect().top;
 
@@ -177,21 +176,20 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+  //Header animation: trigger immediately without scrolling//
+  const HeaderTitles = document.querySelector('.header-content p');
+    if(HeaderTitles){
+   HeaderTitles.classList.add('animate-item');}
+   HeaderTitles.setAttribute('data-animation', 'fade');
+   //small delay starts loading//
+   setTimeout(() =>{
+    HeaderTitles.classList.add('active')}, 500);
 
 
-    // Header animation: trigger immediately without scrolling
-    // Header animation: trigger immediately on load
-  const headerText = document.querySelector('.header-content p');
-  
-  if (headerText) {
-    headerText.classList.add('animate-item');
-    headerText.setAttribute('data-animation', 'fade');
-    
-    // Tiny delay to ensure the browser registers the starting state
-    setTimeout(() => {
-      headerText.classList.add('active');
-    }, 150);
-  }
+  window.addEventListener('scroll', checkScroll);
+  checkScroll(); // Run once to check items already in view
+});
+
 
 // ========================================================================= //
 //  Contact Form Submission (EmailJS)
