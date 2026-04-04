@@ -199,22 +199,18 @@ $(document).ready(function() {
     event.preventDefault();
     
     const btn = $(this).find('.btn-send');
+    const originalText = btn.val();
     btn.val('SENDING...');
 
-    // Replace with your actual IDs from EmailJS
-    const serviceID = 'service_oissmik';
-    const templateID = 'template_6jqt3na'; // Your current template ID
-
-    emailjs.sendForm(serviceID, templateID, this)
+    // Ensure your IDs are correct here
+    emailjs.sendForm('service_oissmik', 'template_6jqt3na', this)
       .then(() => {
-        alert('Message sent successfully! I will get back to you soon.');
+        alert('Message sent! I will get back to you soon.');
         $('#contact-form')[0].reset();
-        btn.val('SEND MESSAGE');
+        btn.val(originalText);
       }, (err) => {
-        alert('Failed to send. Please check your account keys or email me directly.');
-        btn.val('SEND MESSAGE');
+        alert('Failed to send. Please check your account keys.');
+        btn.val(originalText);
       });
   });
 });
-
-
