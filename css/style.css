@@ -633,39 +633,35 @@ p {
 
 
 /* 1. Define the Fade & Slide animation */
-@keyframes reveal {
-  from {
+/* 1. Define the animation */
+@keyframes fadeInUp {
+  0% {
     opacity: 0;
     transform: translateY(30px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* 2. Apply to all animated items using the Browser's Scroll Timeline */
+/* 2. Apply it to the items */
 .animate-item {
-  /* Initial state for browsers that don't support scroll-timeline */
-  opacity: 0;
-  
-  /* Use the GPU for smooth mobile performance */
-  will-change: transform, opacity;
-
-  /* The "Magic" that replaces JavaScript */
-  animation: reveal linear both;
-  animation-timeline: view();
-  
-  /* Starts animating when 5% of the item is visible at the bottom */
-  /* Finishes when it has moved 30% up the screen */
-  animation-range: entry 5% cover 30%;
+  opacity: 0; /* Start hidden */
+  animation: fadeInUp 0.8s ease-out forwards;
+  will-change: transform, opacity; /* Fixes mobile resistance */
 }
 
-/* 3. Keep your specific directional slides if you still want them */
-[data-animation="slide-left"] {
-  transform: translateX(-50px);
+/* 3. Stagger them so they don't all pop up at once */
+.about-img.animate-item { animation-delay: 0.2s; }
+.about-descr.animate-item { animation-delay: 0.4s; }
+#contact .animate-item { animation-delay: 0.3s; }
+
+.services-block {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
 
-[data-animation="slide-right"] {
-  transform: translateX(50px);
-}
