@@ -162,19 +162,38 @@ p {
 
 /* --- Updated Hero Section (Replace old header styles with this) --- */
 .home {
-  background: url("../img/home-bg.jpg") no-repeat center center fixed; /* Ensure path is correct */
+  background: url("img/home-bg.jpg") no-repeat center center; /* Check if your file is named home-bg.jpg */
   background-size: cover;
   height: 100vh;
   width: 100%;
+  position: relative;
+}
+
+/* Prevent horizontal scrolling/gaps */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix the Header Container */
+#header .container {
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .header-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start; 
-  padding-left: 10%;
-  height: 100vh; /* Ensures it centers vertically on the screen */
+  align-items: flex-start;
+  padding-left: 10%; /* Adjust this to move text left/right */
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn't add to width */
 }
 
 .header-content h1 {
