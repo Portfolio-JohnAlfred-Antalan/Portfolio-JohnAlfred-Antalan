@@ -823,55 +823,64 @@
 <!-- contact form -->
 
 
-<div id="contact" class="paddsection animate" style="padding-top: 100px; padding-bottom: 100px;">
+<div id="contact" class="paddsection animate">
   <div class="container">
-    <div class="contact-block1">
-      <div class="row">
-        <div class="col-lg-6 animate-item" data-animation="slide-left">
-          <div class="contact-contact">
-            <h2 class="mb-30">GET IN TOUCH</h2>
-            <ul class="contact-details" style="list-style: none; padding: 0;">
-              <li style="margin-bottom: 15px;"><span style="color: #FFDA03; font-weight: 600;">ADDRESS:</span> Quezon City, Philippines</li>
-              <li style="margin-bottom: 15px;"><span style="color: #FFDA03; font-weight: 600;">EMAIL:</span> ja.antalan2020@gmail.com</li>
-              <li style="margin-bottom: 15px;"><span style="color: #FFDA03; font-weight: 600;">PHONE:</span> 0949 961 6353</li>
-            </ul>
+    <div class="section-title text-center">
+      <h2>GET IN TOUCH</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="row">
+          <div class="col-lg-4 animate-item" data-animation="slide-left">
+            <p style="color: #f0e4e4;"><strong>ADDRESS:</strong> Quezon City, Philippines</p>
+            <p style="color: #f0e4e4;"><strong>EMAIL:</strong> ja.antalan2020@gmail.com</p>
+            <p style="color: #f0e4e4;"><strong>PHONE:</strong> 0949 961 6353</p>
           </div>
-        </div>
-
-        <div class="col-lg-6 animate-item" data-animation="slide-right">
-          <form id="contact-form" role="form" class="contactForm">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <input type="text" name="from_name" class="form-control" id="name" placeholder="Your Name" required />
+          
+          <div class="col-lg-8 animate-item" data-animation="slide-right">
+            <form id="contact-form" role="form" class="contactForm">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type="text" name="from_name" class="form-control" id="name" placeholder="Your Name" required />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type="email" class="form-control" name="from_email" id="email" placeholder="Your Email" required />
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <input type="submit" class="btn btn-defeault btn-send" value="SEND MESSAGE">
                 </div>
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <input type="email" class="form-control" name="from_email" id="email" placeholder="Your Email" required />
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="form-group">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <input type="submit" class="btn btn-defeault btn-send" value="SEND MESSAGE">
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<footer class="text-center py-4" style="background: #181818;">
+  <div class="container">
+    <p>&copy; Copyrights John Alfred M. Antalan. All rights reserved.</p>
+    <div class="credits">Credits to <a href="https://github.com/Ottsupi">Ottsupi</a></div>
+  </div>
+</footer>
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="text/javascript">
    (function(){
-      emailjs.init("EL53BT7tilzuaSQ1d"); // Replace with your actual Public Key
+      // Replace "YOUR_PUBLIC_KEY" with the key from your EmailJS Account
+      emailjs.init("EL53BT7tilzuaSQ1d");
    })();
 </script>
+
 
 
 <!-- end of contact form -->
