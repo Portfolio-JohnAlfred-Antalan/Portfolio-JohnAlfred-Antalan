@@ -202,14 +202,14 @@ $(document).ready(function() {
     const originalText = btn.val();
     btn.val('SENDING...');
 
-    // Ensure your IDs are correct here
+    // Use your actual Service ID and the Template ID from your screenshot
     emailjs.sendForm('service_oissmik', 'template_6jqt3na', this)
       .then(() => {
         alert('Message sent! I will get back to you soon.');
         $('#contact-form')[0].reset();
         btn.val(originalText);
       }, (err) => {
-        alert('Failed to send. Please check your account keys.');
+        alert('Send failed. Check your Public Key in index.html');
         btn.val(originalText);
       });
   });
