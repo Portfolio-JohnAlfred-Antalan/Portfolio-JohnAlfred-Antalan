@@ -161,59 +161,58 @@ p {
 /*-----------------------------------------------------------------------------------*/
 
 #header {
-  background: url("../images/home-bg.jpg") repeat scroll center center / cover;
+  background: url("../images/home-bg.jpg") no-repeat center center / cover; /* Using your new image */
   height: 100vh;
   width: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center center;
+  display: flex;             /* Added to center content */
+  align-items: center;       /* Vertical center */
+  justify-content: center;    /* Horizontal center */
+  text-align: center;
 }
 
-
-/* Vertical Scroll Animation Styles */
+/* --- Vertical Scroll Animation --- */
 .scroll-container {
   display: flex;
+  justify-content: center;
   align-items: center;
-  font-size: 24px;
-  font-weight: 500;
-  color: #fff;
+  font-size: 28px;
+  font-weight: 600;
+  height: 50px; 
   overflow: hidden;
-  height: 40px; /* Adjust based on font size */
 }
 
 .static-text {
-  margin-right: 10px;
+  margin-right: 12px;
+  color: #fff;
 }
 
 .scroll-wrapper {
-  height: 40px; /* Must match .scroll-container height */
+  height: 50px; 
   overflow: hidden;
 }
 
 .scroll-items {
   display: flex;
   flex-direction: column;
-  animation: scrollUp 6s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  /* 6 seconds total: 1.5s per word + 1.5s for the loop reset */
+  animation: scrollUpLoop 6s cubic-bezier(0.76, 0, 0.24, 1) infinite;
 }
 
 .scroll-items span {
   display: block;
-  height: 40px;
-  color: #fcac33; /* Your signature yellow/orange */
+  height: 50px;
+  line-height: 50px;
+  color: #FFDA03; /* Your theme yellow */
   text-transform: uppercase;
-  letter-spacing: 2px;
-  line-height: 40px;
+  white-space: nowrap;
 }
 
-@keyframes scrollUp {
-  0% { transform: translateY(0); }
-  25% { transform: translateY(-40px); }
-  50% { transform: translateY(-80px); }
-  75% { transform: translateY(-120px); }
-  100% { transform: translateY(-120px); } /* Holds on the last (duplicate) item before snap-reset */
+@keyframes scrollUpLoop {
+  0%, 10%   { transform: translateY(0); }         /* Video Editor */
+  30%, 40%  { transform: translateY(-50px); }    /* Director */
+  60%, 70%  { transform: translateY(-100px); }   /* Videographer */
+  90%, 100% { transform: translateY(-150px); }   /* Back to Video Editor (Seamless) */
 }
-
 /*-----------------------------------------------------------------------------------*/
 /*  About-us
 /*-----------------------------------------------------------------------------------*/
