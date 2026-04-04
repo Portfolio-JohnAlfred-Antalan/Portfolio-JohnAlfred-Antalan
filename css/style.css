@@ -506,6 +506,28 @@ p {
   transform: translate3d(0, 0, 0);
 }
 
+/* Optimized Left Animation */
+[data-animation="slide-left"] {
+  opacity: 0;
+  /* Use translate3d(x, y, z) for GPU acceleration */
+  transform: translate3d(-50px, 0, 0); 
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Optimized Right Animation */
+[data-animation="slide-right"] {
+  opacity: 0;
+  transform: translate3d(50px, 0, 0); 
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Common Active State */
+[data-animation].active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) !important;
+}
 
 
 
