@@ -166,28 +166,31 @@ document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
   function checkScroll() {
-    const triggerBottom = window.innerHeight * 0.65;
+    // The video uses 5 / 4 (0.8), which is perfect for mobile
+    const triggerBottom = window.innerHeight / 5 * 4;
 
     animatedItems.forEach(item => {
       const itemTop = item.getBoundingClientRect().top;
 
       if (itemTop < triggerBottom) {
         item.classList.add('active');
+      } else {
+        // Optional: remove 'active' to animate again when scrolling up
+        // item.classList.remove('active'); 
       }
     });
   }
-  //Header animation: trigger immediately without scrolling//
-  const HeaderTitles = document.querySelector('.header-content p');
-    if(HeaderTitles){
-   HeaderTitles.classList.add('animate-item');}
-   HeaderTitles.setAttribute('data-animation', 'fade');
-   //small delay starts loading//
-   setTimeout(() =>{
-    HeaderTitles.classList.add('active')}, 500);
 
+  // Header: immediate trigger for the "Video Editor" title
+  const headerText = document.querySelector('.header-content p');
+  if (headerText) {
+    headerText.classList.add('animate-item');
+    headerText.setAttribute('data-animation', 'slide-left'); // Or 'fade'
+    setTimeout(() => headerText.classList.add('active'), 200);
+  }
 
   window.addEventListener('scroll', checkScroll);
-  checkScroll(); // Run once to check items already in view
+  checkScroll(); 
 });
 
 
