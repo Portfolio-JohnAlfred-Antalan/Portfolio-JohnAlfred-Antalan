@@ -165,16 +165,6 @@ $(window).load(function(){
 document.addEventListener('DOMContentLoaded', function () {
   const animatedItems = document.querySelectorAll('.animate-item');
 
-  function checkScroll() {
-    const triggerBottom = window.innerHeight * 0.65;
-
-    animatedItems.forEach(item => {
-      const itemTop = item.getBoundingClientRect().top;
-
-      if (itemTop < triggerBottom) {
-        item.classList.add('active');
-      }
-    });
   }
   //Header animation: trigger immediately without scrolling//
   const HeaderTitles = document.querySelector('.header-content p');
@@ -184,11 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
    //small delay starts loading//
    setTimeout(() =>{
     HeaderTitles.classList.add('active')}, 500);
-
-
-  window.addEventListener('scroll', checkScroll);
-  checkScroll(); // Run once to check items already in view
-});
+  
 
 
 // ========================================================================= //
@@ -196,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // ========================================================================= //
 $(document).ready(function() {
   $('#contact-form').on('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault(;
     
     const btn = $(this).find('.btn-send');
     const originalText = btn.val();
