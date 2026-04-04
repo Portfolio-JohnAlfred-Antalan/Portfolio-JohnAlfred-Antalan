@@ -488,43 +488,25 @@ p {
   ease-in-out;
 }
 
-
-/* Initial hidden state */
+/* Optimized Animation Core */
+[data-animation="fade"], 
 .animate-item {
   opacity: 0;
-  transform: translateY(30px); /* Starts slightly downwards */
-  transition: all 0.8s ease-in-out;
+  /* translate3d tells the GPU to take over the movement */
+  transform: translate3d(0, 30px, 0); 
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  /* will-change prevents the 'jump' at the start of the animation */
+  will-change: opacity, transform; 
+  backface-visibility: hidden;
 }
 
-/* Slide from left */
-[data-animation="slide-left"] {
-  transform: translateX(-50px);
-}
-
-/* Slide from right */
-[data-animation="slide-right"] {
-  transform: translateX(50px);
-}
-
-/* Fade and slide into place when active */
 .animate-item.active {
   opacity: 1;
-  transform: translateX(0) translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
-/* Staggered animations */
-.animate-item {
-  transition-delay: 0.2s;
-}
 
-.animate-item:nth-child(2) {
-  transition-delay: 0.4s;
-}
-
-.animate-item:nth-child(3) {
-  transition-delay: 0.6s;
-
-}
 
 
 /* --- Portfolio Button Hover & Glow Effects --- */
