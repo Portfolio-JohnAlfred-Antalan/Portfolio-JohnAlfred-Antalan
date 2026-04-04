@@ -495,14 +495,15 @@ p {
 /* --- Updated Animation: 70px Travel & No Blur --- */
 .animate-item {
   opacity: 0;
-  /* Start 70px lower for a longer "rise" effect */
+  /* Set the starting "drop" to 70px */
   transform: translate3d(0, 70px, 0); 
-  /* Transition only opacity and transform for mobile stability */
-  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+  /* Apply your specific smooth transition line here */
+  transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   visibility: hidden;
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
+
 
 /* Slide Left: Starting 70px to the left */
 [data-animation="slide-left"] {
