@@ -629,3 +629,43 @@ p {
   font-size: 13px;
   letter-spacing: 1px;
 }
+
+
+
+/* 1. Define the Fade & Slide animation */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Apply to all animated items using the Browser's Scroll Timeline */
+.animate-item {
+  /* Initial state for browsers that don't support scroll-timeline */
+  opacity: 0;
+  
+  /* Use the GPU for smooth mobile performance */
+  will-change: transform, opacity;
+
+  /* The "Magic" that replaces JavaScript */
+  animation: reveal linear both;
+  animation-timeline: view();
+  
+  /* Starts animating when 5% of the item is visible at the bottom */
+  /* Finishes when it has moved 30% up the screen */
+  animation-range: entry 5% cover 30%;
+}
+
+/* 3. Keep your specific directional slides if you still want them */
+[data-animation="slide-left"] {
+  transform: translateX(-50px);
+}
+
+[data-animation="slide-right"] {
+  transform: translateX(50px);
+}
