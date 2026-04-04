@@ -160,100 +160,75 @@ p {
 /*  Header
 /*-----------------------------------------------------------------------------------*/
 
-#header {
-  background: url("../images/home-bg.jpg") repeat scroll center center / cover;
+/* --- Updated Hero Section (Replace old header styles with this) --- */
+.home {
+  background: url("../img/home-bg.jpg") no-repeat center center fixed; /* Ensure path is correct */
+  background-size: cover;
   height: 100vh;
   width: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center center;
 }
 
-
-#header .header-content {
-  height: 100vh;
-  text-align: left;
-  width: 100%;
+.header-content {
   display: flex;
-  justify-content: flex-end;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; 
+  padding-left: 10%;
+  height: 100vh; /* Ensures it centers vertically on the screen */
 }
 
 .header-content h1 {
-  font-size: 40px;
-  font-weight: 700;
+  font-size: 60px;
+  font-weight: 800;
+  color: #FFDA03;
   margin-bottom: 10px;
   text-transform: uppercase;
-  color: #fcac33;
 }
 
-.header-content p {
-  font-size: 13px;
-  letter-spacing: 5px;
-  margin-top: 0;
-  margin-bottom: 30px;
-  text-transform: capitalize;
-  color: #fff;
+/* --- New Looping Animation Logic (Add this) --- */
+.loop-wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
   font-weight: 500;
+  color: #ffffff;
+  overflow: hidden;
+  height: 50px; /* This fixed height prevents the layout from jumping */
 }
 
-.header-content .list-social li {
-  float: left;
-  margin-right: 20px;
+.static-text {
+  margin-right: 10px;
+  white-space: nowrap;
 }
 
-.header-content .list-social li i {
-  color: #fff;
-  font-size: 15px;
+.animated-text {
+  height: 50px;
+  line-height: 50px;
+  overflow: hidden;
 }
 
-/*Simple Fade in starting state */
-[data-animation = "fade"] {
-  opacity: 0;
-  transform: translateY(-25px);
-  transition: opacity 1.2s ease-out;
-  transform: 1.2s ease-out;
-}
-/*Active state triggered by js*/
-[data-animation ="fade"].active {
-  opacity: 1;
-  transform: translateY(0)
+.animated-text span {
+  display: block;
+  color: #007bff; /* The blue color from your reference */
+  height: 100%;
+  animation: spin_words 9s infinite; /* Adjust speed here */
 }
 
-/* --- Header Layout & Animation Fix --- */
-
-/* 1. Prevent Typed.js from moving the header as it types */
-.header-content p span {
-  display: inline-block;
-  min-width: 250px; /* Reserves space so the header stays still */
-  text-align: left;
+/* Vertical Loop Animation */
+@keyframes spin_words {
+  0%, 20% { transform: translateY(0); }
+  33%, 53% { transform: translateY(-100%); }
+  66%, 86% { transform: translateY(-200%); }
+  100% { transform: translateY(0); }
 }
 
-/* 2. Custom distance for the header only (Safer than 70px) */
-.header-content .animate-item {
-  transform: translate3d(0, 30px, 0) !important; /* Shorter distance */
-  transition: opacity 1.2s ease-out, transform 1.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+/* Responsive fix for mobile */
+@media (max-width: 768px) {
+  .header-content h1 { font-size: 35px; }
+  .loop-wrapper { font-size: 20px; height: 40px; }
+  .animated-text { height: 40px; line-height: 40px; }
 }
 
-/* 3. Base animation for everything else (Scroll sections) */
-.animate-item {
-  opacity: 0;
-  position: relative; /* Keeps it in the flow without pushing others */
-  transform: translate3d(0, 50px, 0); /* Reduced slightly from 70px for stability */
-  transition: opacity 1.2s ease-out, transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-  visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
-}
-
-/* Ensure the active state is perfectly reset to remove any gaps */
-.header-content p span.typed {
-  display: inline-block;
-  min-width: 200px; /* Adjust this to match your longest title */
-  text-align: left;
-  vertical-align: middle;
-}
 
 /*-----------------------------------------------------------------------------------*/
 /*  About-us
