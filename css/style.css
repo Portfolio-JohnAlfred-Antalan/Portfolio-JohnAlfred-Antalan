@@ -558,17 +558,25 @@ p {
 
 /* --- Contact --- */
 #contact {
-  background-color: #2a2a2a !important; /* The gray background to separate from work section */
+  background-color: #2a2a2a !important;
   padding-top: 100px;
   padding-bottom: 100px;
-  position: relative;
-  z-index: 1;
   border-top: 1px solid #333;
 }
 
-/* Fixes the spacing so Name, Email, and Subject boxes don't touch */
+/* 1. Improved Title*/
+.section-title h2 {
+  font-size: 40px;      /* Larger title */
+  font-weight: 800;    /* Extra bold */
+  letter-spacing: 3px;
+  margin-bottom: 60px; /* Space between title and content */
+  color: #FFDA03;
+  text-transform: uppercase;
+}
+
+/* 2. Content Styling */
 .contactForm .form-group {
-  margin-bottom: 25px; 
+  margin-bottom: 25px;
 }
 
 .contactForm .form-control {
@@ -576,46 +584,48 @@ p {
   border: 1px solid #444;
   color: #fff;
   border-radius: 0;
-  padding: 12px 15px;
-  height: auto;
-  transition: all 0.3s ease-in-out;
+  padding: 15px;
 }
 
-/* Highlight the box when the user clicks to type */
 .contactForm .form-control:focus {
-  background: #222;
-  border-color: #FFDA03; /* Signature Yellow */
-  color: #fff;
+  border-color: #FFDA03;
   box-shadow: none;
-  outline: none;
 }
 
-/* Style for the Send Message button */
+/* 3. Centered Button & Layout Fix */
 .btn-send {
   background: #FFDA03 !important;
   color: #181818 !important;
   font-weight: 700;
-  letter-spacing: 2px;
-  width: 100%;
+  letter-spacing: 1px;
+  
+  /* Centering Logic */
+  display: block;
+  margin: 30px auto 0 auto; /* Centers the button horizontally */
+  width: 250px;             /* Fixed width so it's not too long */
+  
   border-radius: 0;
+  padding: 15px 30px;
   border: none;
-  padding: 15px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .btn-send:hover {
-  background: #fff !important; /* Turns white on hover for a high-end feel */
-  cursor: pointer;
+  background: #fff !important;
+  transform: translateY(-2px); /* Subtle lift effect */
 }
 
-/* Ensure the Address/Email/Phone text is readable on gray */
+/* Professional Detail Styling */
 #contact p {
+  font-size: 16px;
+  line-height: 1.8;
   color: #f0e4e4;
-  margin-bottom: 20px;
 }
 
 #contact p strong {
-  color: #FFDA03; /* Makes labels like ADDRESS: and EMAIL: pop */
-  margin-right: 10px;
+  color: #FFDA03;
+  font-weight: 600;
+  display: block; /* Puts label above the detail for better hierarchy */
+  font-size: 12px;
+  letter-spacing: 1px;
 }
-
