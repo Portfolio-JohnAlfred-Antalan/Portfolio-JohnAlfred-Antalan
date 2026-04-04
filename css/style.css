@@ -488,47 +488,43 @@ p {
   ease-in-out;
 }
 
-/* Optimized Animation Core */
-[data-animation="fade"], 
+
+/* Initial hidden state */
 .animate-item {
   opacity: 0;
-  /* translate3d tells the GPU to take over the movement */
-  transform: translate3d(0, 30px, 0); 
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  /* will-change prevents the 'jump' at the start of the animation */
-  will-change: opacity, transform; 
-  backface-visibility: hidden;
+  transform: translateY(30px); /* Starts slightly downwards */
+  transition: all 0.8s ease-in-out;
 }
 
+/* Slide from left */
+[data-animation="slide-left"] {
+  transform: translateX(-50px);
+}
+
+/* Slide from right */
+[data-animation="slide-right"] {
+  transform: translateX(50px);
+}
+
+/* Fade and slide into place when active */
 .animate-item.active {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translateX(0) translateY(0);
 }
 
-/* Optimized Left Animation */
-[data-animation="slide-left"] {
-  opacity: 0;
-  /* Use translate3d(x, y, z) for GPU acceleration */
-  transform: translate3d(-50px, 0, 0); 
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
+/* Staggered animations */
+.animate-item {
+  transition-delay: 0.2s;
 }
 
-/* Optimized Right Animation */
-[data-animation="slide-right"] {
-  opacity: 0;
-  transform: translate3d(50px, 0, 0); 
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
+.animate-item:nth-child(2) {
+  transition-delay: 0.4s;
 }
 
-/* Common Active State */
-[data-animation].active {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) !important;
-}
+.animate-item:nth-child(3) {
+  transition-delay: 0.6s;
 
+}
 
 
 /* --- Portfolio Button Hover & Glow Effects --- */
