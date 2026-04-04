@@ -490,40 +490,35 @@ p {
 
 
 /* Initial hidden state */
+
+/* --- Animation Fix: No Squeezing & No Jumping --- */
 .animate-item {
   opacity: 0;
-  transform: translateY(30px); /* Starts slightly downwards */
-  transition: all 0.8s ease-in-out;
+  filter: blur(5px);
+  /* Use 3D transform to keep the animation on its own layer */
+  transform: translate3d(0, 20px, 0); 
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.8s ease-out;
+  visibility: hidden;
+  /* Prevents the element from affecting layout during animation */
+  will-change: transform, opacity; 
 }
 
-/* Slide from left */
+/* Slide Left: Use a smaller fixed value instead of 100% to prevent squeezing */
 [data-animation="slide-left"] {
-  transform: translateX(-50px);
+  transform: translate3d(-30px, 0, 0);
 }
 
-/* Slide from right */
+/* Slide Right */
 [data-animation="slide-right"] {
-  transform: translateX(50px);
+  transform: translate3d(30px, 0, 0);
 }
 
-/* Fade and slide into place when active */
+/* Active state: perfectly reset to 0 */
 .animate-item.active {
-  opacity: 1;
-  transform: translateX(0) translateY(0);
-}
-
-/* Staggered animations */
-.animate-item {
-  transition-delay: 0.2s;
-}
-
-.animate-item:nth-child(2) {
-  transition-delay: 0.4s;
-}
-
-.animate-item:nth-child(3) {
-  transition-delay: 0.6s;
-
+  opacity: 1 !important;
+  filter: blur(0) !important;
+  transform: translate3d(0, 0, 0) !important;
+  visibility: visible !important;
 }
 
 
