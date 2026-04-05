@@ -75,17 +75,7 @@ $(document).ready(function() {
   //  Typed Js
   // ========================================================================= //
 
-  var typed = $(".typed");
 
-$(function() {
-  typed.typed({
-    strings: ["Video Editor", "Videographer", "Director"],
-    typeSpeed: 70,
-    backSpeed: 40,      // Smoothly deletes the text
-    backDelay: 2000,    // Pause before switching to the next role
-    loop: true,
-  });
-});
 
 
   // ========================================================================= //
