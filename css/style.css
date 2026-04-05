@@ -226,27 +226,39 @@ p {
 
 /* Layout for the "I am a" line */
 
+/* Container alignment - Moving from Center to Left */
+.header-content {
+  text-align: left; /* Align everything to the left */
+  padding-left: 10%; /* Give it some breathing room from the edge */
+}
+
+.name-focus {
+  font-family: 'Playfair Display', serif;
+  font-size: 65px; /* Larger for better hierarchy */
+  font-weight: 900;
+  color: #FFDA03;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  line-height: 1.1;
+}
+
 .scrolling-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
+  justify-content: flex-start; /* Aligns items to the left */
+  align-items: baseline; /* Aligns text bottoms perfectly */
 }
 
 .static-text {
-  margin: 0 !important;
   font-family: 'Poppins', sans-serif;
-  font-size: 28px; /* Slightly larger */
-  color: #fff;
-  font-weight: 400;
+  font-size: 22px; /* Smaller than the name for hierarchy */
+  color: #ffffff;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .scrolling-wrapper {
-  /* Increased height so text doesn't hide/cut off */
-  height: 45px; 
+  height: 40px; 
   overflow: hidden;
-  display: inline-block;
 }
 
 .scrolling-words {
@@ -257,38 +269,40 @@ p {
 
 .scrolling-words span {
   display: block;
-  height: 45px;
-  line-height: 45px; /* Centers the text vertically */
-  font-family: 'Playfair Display', serif; /* Better font */
-  font-size: 30px; 
+  height: 40px;
+  line-height: 40px;
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; /* Popping out slightly more than the "I am a" */
   font-weight: 700;
-  font-style: italic; /* Looks great for creative titles */
+  font-style: italic;
   color: #FFDA03;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-/* Updated Keyframes to match the 45px height */
+/* Keyframes for 40px height */
 @keyframes scrollUpLoop {
   0%, 25% { transform: translateY(0); }
-  30%, 55% { transform: translateY(-45px); }
-  60%, 85% { transform: translateY(-90px); }
-  90%, 100% { transform: translateY(-135px); }
+  30%, 55% { transform: translateY(-40px); }
+  60%, 85% { transform: translateY(-80px); }
+  90%, 100% { transform: translateY(-120px); }
 }
 
-/* Mobile Fix */
+/* Mobile Responsive adjustment */
 @media (max-width: 768px) {
-  .static-text { font-size: 20px; }
-  .scrolling-words span { font-size: 22px; height: 35px; line-height: 35px; }
-  .scrolling-wrapper { height: 35px; }
-  
+  .header-content { padding-left: 5%; }
+  .name-focus { font-size: 38px; }
+  .static-text { font-size: 16px; }
+  .scrolling-words span { font-size: 20px; height: 30px; line-height: 30px; }
+  .scrolling-wrapper { height: 30px; }
   @keyframes scrollUpLoop {
     0%, 25% { transform: translateY(0); }
-    30%, 55% { transform: translateY(-35px); }
-    60%, 85% { transform: translateY(-70px); }
-    90%, 100% { transform: translateY(-105px); }
+    30%, 55% { transform: translateY(-30px); }
+    60%, 85% { transform: translateY(-60px); }
+    90%, 100% { transform: translateY(-90px); }
   }
 }
+
 
 /*-----------------------------------------------------------------------------------*/
 /*  About-us
