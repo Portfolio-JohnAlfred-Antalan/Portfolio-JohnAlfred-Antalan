@@ -225,70 +225,70 @@ p {
 
 
 /* Layout for the "I am a" line */
+
 .scrolling-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .static-text {
   margin: 0 !important;
-  font-size: 24px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px; /* Slightly larger */
   color: #fff;
   font-weight: 400;
   text-transform: uppercase;
 }
 
-/* The "window" through which you see the words */
 .scrolling-wrapper {
-  height: 35px; /* Matches line-height of the spans */
+  /* Increased height so text doesn't hide/cut off */
+  height: 45px; 
   overflow: hidden;
+  display: inline-block;
 }
 
 .scrolling-words {
   display: flex;
   flex-direction: column;
-  /* 9 seconds total: 3 seconds per word */
-  animation: scrollUpLoop 9s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  animation: scrollUpLoop 10s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
 }
 
 .scrolling-words span {
   display: block;
-  height: 35px;
-  line-height: 35px;
-  font-size: 24px;
+  height: 45px;
+  line-height: 45px; /* Centers the text vertically */
+  font-family: 'Playfair Display', serif; /* Better font */
+  font-size: 30px; 
   font-weight: 700;
-  color: #FFDA03; /* Matches your theme gold */
+  font-style: italic; /* Looks great for creative titles */
+  color: #FFDA03;
   text-transform: uppercase;
-  text-align: left;
+  white-space: nowrap;
 }
 
-/* Vertical Animation Logic */
+/* Updated Keyframes to match the 45px height */
 @keyframes scrollUpLoop {
   0%, 25% { transform: translateY(0); }
-  33%, 58% { transform: translateY(-35px); }
-  66%, 91% { transform: translateY(-70px); }
-  100% { transform: translateY(-105px); }
+  30%, 55% { transform: translateY(-45px); }
+  60%, 85% { transform: translateY(-90px); }
+  90%, 100% { transform: translateY(-135px); }
 }
 
-/* Mobile responsive font sizing */
+/* Mobile Fix */
 @media (max-width: 768px) {
-  .static-text, .scrolling-words span {
-    font-size: 18px;
-  }
-  .scrolling-wrapper, .scrolling-words span {
-    height: 30px;
-    line-height: 30px;
-  }
+  .static-text { font-size: 20px; }
+  .scrolling-words span { font-size: 22px; height: 35px; line-height: 35px; }
+  .scrolling-wrapper { height: 35px; }
+  
   @keyframes scrollUpLoop {
     0%, 25% { transform: translateY(0); }
-    33%, 58% { transform: translateY(-30px); }
-    66%, 91% { transform: translateY(-60px); }
-    100% { transform: translateY(-90px); }
+    30%, 55% { transform: translateY(-35px); }
+    60%, 85% { transform: translateY(-70px); }
+    90%, 100% { transform: translateY(-105px); }
   }
 }
-
 
 /*-----------------------------------------------------------------------------------*/
 /*  About-us
