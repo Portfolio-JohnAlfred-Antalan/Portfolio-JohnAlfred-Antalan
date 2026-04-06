@@ -186,7 +186,8 @@ p {
   font-weight: 700;
   margin-bottom: 0px;
   text-transform: uppercase;
-  color: #fcac33;
+  color: rgb(173, 233, 63);
+  text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.6);
 }
 
 .header-content p {
@@ -682,11 +683,13 @@ p {
   font-weight: 500;
   letter-spacing: 3px;
   white-space: nowwrap;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);/* drop shadow */
 }
 
 .scroll-window {
   height: 40px; /* Adjust height to match line-height */
   overflow: hidden;
+  
 }
 
 .scroll-container {
@@ -700,9 +703,10 @@ p {
   height: 40px;
   line-height: 40px;
   font-size: 27px;
-  color: #3a9ecc; /* Signature yellow for the roles */
+  color: rgb(233, 230, 63);/* Signature yellow for the roles */
   font-weight: 700;
   text-transform: lowercase;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); /* drop shadow */
   margin: 0;
 }
 
@@ -735,7 +739,8 @@ p {
   font-weight: 700;
   margin-bottom: 0px;
   text-transform: uppercase;
-  color: #fcac33;
+  color: rgb(173, 233, 63);
+  text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.6);
   }
 
    .about-heading {
@@ -748,5 +753,41 @@ p {
   font-weight: 300;
   }
 }
+
+/* header text animations */
+.reveal-container {
+  overflow: hidden;
+  display: block;
+}
+
+/* The actual animation */
+.reveal-text, .reveal-text-delayed {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  animation: revealUp 1.9s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Delay the second line for a "staggered" look */
+.reveal-text-delayed {
+  animation-delay: 0.8s;
+}
+
+/* Keyframe for the slide-up effect */
+@keyframes revealUp {
+  0% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+
+  
+  100% {
+    transform: translateX(0%);
+    opacity: 1 ;
+  }
+
+}
+
+
 
 
