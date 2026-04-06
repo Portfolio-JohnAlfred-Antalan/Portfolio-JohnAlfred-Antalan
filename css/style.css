@@ -182,7 +182,7 @@ p {
 }
 
 .header-content h1 {
-  font-size: 45px;
+  font-size: 52px;
   font-weight: 700;
   margin-bottom: 0px;
   text-transform: uppercase;
@@ -730,7 +730,22 @@ p {
     padding-top: 100px !important; 
   }
 
-  
+  .about-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px !important;
+  line-height: 1 !important; /* Extra breathing room between lines */
+  color: #e0e0e0 !important;   /* Clean off-white */
+  text-align: justify;
+  letter-spacing: 0em;
+  font-weight: 300;
+  }
+  .header-content h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: #fcac33;
+  }
 }
 
 
