@@ -714,27 +714,20 @@ p {
 }
 
 
-/* Mobile Fix: Only triggers on small screens */
+/* Mobile Adjustment: Moves text higher */
 @media (max-width: 768px) {
   .scrolling-wrapper {
-    flex-direction: column; /* Stacks "I am a" on top of the titles */
-    align-items: center;    /* Centers everything */
-    gap: 5px;              /* Reduces the gap for smaller screens */
-  }
-
-  .static-text {
-    font-size: 20px;       /* Makes text slightly smaller to fit screen width */
-    letter-spacing: 1px;
-    margin-bottom: 0;
-  }
-
-  .scroll-window {
-    height: 35px;          /* Adjusts height for the smaller font */
-  }
-
-  .scroll-item {
-    font-size: 22px;       /* Smaller font for the scrolling titles */
-    line-height: 35px;     /* Must match .scroll-window height to stay centered */
+    /* Adjust this number to move it up. 
+       Negative margin pulls the element higher. */
+    margin-top: 0px !important; 
+  
+/*     /* Ensures the bottom space is cleared */
+/*     margin-bottom: 30px !important;  */
+  } 
+ 
+  .header-content {
+    /* Adjusts the main container's padding to push content up */
+    padding-top: 150px !important; 
   }
 }
 
