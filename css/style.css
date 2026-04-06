@@ -671,7 +671,7 @@ p {
 .scrolling-wrapper {
   display: flex !important;
   align-items: center;
-  gap: 100px; /* Space between 'I am a' and the titles */
+  gap: 10px; /* Space between 'I am a' and the titles */
   margin-top: 0px;
   margin-bottom: 40px;
 }
