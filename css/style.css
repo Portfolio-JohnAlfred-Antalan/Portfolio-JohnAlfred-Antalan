@@ -426,7 +426,7 @@ p {
 }
 
 .services-carousel .owl-dot.active {
-  background-color: #498506;
+  background-color: #008ba3;
 }
 
 .owl-nav {
@@ -730,21 +730,22 @@ p {
     padding-top: 100px !important; 
   }
 
-  .about-heading {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px !important;
-  line-height: 1 !important; /* Extra breathing room between lines */
-  color: #e0e0e0 !important;   /* Clean off-white */
-  text-align: justify;
-  letter-spacing: 0em;
-  font-weight: 300;
-  }
   .header-content h1 {
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 700;
   margin-bottom: 0px;
   text-transform: uppercase;
   color: #fcac33;
+  }
+
+   .about-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px !important;
+  line-height: 1.1 !important; /* Extra breathing room between lines */
+  color: #e0e0e0 !important;   /* Clean off-white */
+  text-align: justify;
+  letter-spacing: 0em;
+  font-weight: 300;
   }
 }
 
