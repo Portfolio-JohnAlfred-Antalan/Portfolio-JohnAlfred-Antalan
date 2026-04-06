@@ -118,8 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function checkScroll() {
   // Logic from the video: 80% height is best for mobile stability
-  const triggerBottom = window.innerHeight * 0.8; // Trigger earlier (at 90% of screen)
-    
+  const triggerBottom = window.innerHeight * 0.8; 
 
   animatedItems.forEach(item => {
     const itemTop = item.getBoundingClientRect().top;
