@@ -714,20 +714,30 @@ p {
 }
 
 
-/* Mobile Adjustment: Moves text higher */
+/* Mobile Fix for Scrollbars and Alignment */
 @media (max-width: 768px) {
+  /* Fixes the Horizontal Scrollbar */
+  body, html {
+    overflow-x: hidden !important;
+    position: relative;
+  }
+
   .scrolling-wrapper {
-    /* Adjust this number to move it up. 
-       Negative margin pulls the element higher. */
-    margin-top: 0px !important; 
-  
-/*     /* Ensures the bottom space is cleared */
-/*     margin-bottom: 30px !important;  */
-  } 
- 
-  .header-content {
-    /* Adjusts the main container's padding to push content up */
-    padding-top: 150px !important; 
+    width: 100%;             /* Don't let it be wider than the screen */
+    box-sizing: border-box;
+    display: block !important; /* Changes from flex to block to prevent stretching */
+    margin-top: -50px !important; /* Pulls it UP like you wanted */
+    padding-left: 15px;      /* Keeps it from touching the very edge */
+  }
+
+  .static-text {
+    display: block;          /* Puts "I am a" on its own line */
+    margin-bottom: 5px;      /* Space between it and the scrolling text */
+  }
+
+  .scroll-window {
+    width: 100%;
+    margin: 0;               /* Removes any side margins pushing it right */
   }
 }
 
