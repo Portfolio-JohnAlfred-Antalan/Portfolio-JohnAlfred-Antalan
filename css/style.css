@@ -186,7 +186,7 @@ p {
   font-weight: 700;
   margin-bottom: 0px;
   text-transform: uppercase;
-  color: rgb(173, 233, 63);
+  color: rgb(255, 255, 255);
   text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.6);
 }
 
@@ -210,17 +210,54 @@ p {
   font-size: 15px;
 }
 
-/*Simple Fade in starting state */
-[data-animation = "fade"] {
-  opacity: 0;
-  transform: translateY(-25px);
-  transition: opacity 1.2s ease-out;
-  transform: 1.2s ease-out;
+/* Vertical Scrolling Animation */
+.scrolling-wrapper {
+  display: flex !important;
+  align-items: center;
+  gap: 10px; /* Space between 'I am a' and the titles */
+  margin-top: 0px;
+  margin-bottom: 40px;
 }
-/*Active state triggered by js*/
-[data-animation ="fade"].active {
-  opacity: 1;
-  transform: translateY(0)
+
+.static-text {
+  font-size: 27px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 3px;
+  white-space: nowwrap;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);/* drop shadow */
+}
+
+.scroll-window {
+  height: 40px; /* Adjust height to match line-height */
+  overflow: hidden;
+  
+}
+
+.scroll-container {
+  display: flex;
+  flex-direction: column;
+  animation: scroll-up-titles 9s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+}
+
+.scroll-container span {/* video editor - videographer  text */
+  display: block;
+  font-style: italic;
+  height: 40px;
+  line-height: 40px;
+  font-size: 27px;
+  color: rgb(236, 240, 7);
+  font-weight: 700;
+  text-transform: lowercase;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+@keyframes scroll-up-titles {
+  0%, 25% { transform: translateY(0); }
+  33%, 58% { transform: translateY(-40px); }
+  66%, 91% { transform: translateY(-80px); }
+  100% { transform: translateY(-120px); }
 }
 
 /* --- Header Layout & Animation Fix --- */
@@ -255,6 +292,46 @@ p {
   min-width: 200px; /* Adjust this to match your longest title */
   text-align: left;
   vertical-align: middle;
+}
+/* Mobile Adjustment: Moves text higher */
+@media (max-width: 768px) {
+  .scrolling-wrapper {
+    /* Adjust this number to move it up. 
+       Negative margin pulls the element higher. */
+    margin-top: 0px !important; 
+    margin-bottom: 60px !important; 
+/*     /* Ensures the bottom space is cleared */
+/*     margin-bottom: 30px !important;  */
+  } 
+ 
+  .header-content {
+    /* Adjusts the main container's padding to push content up */
+    padding-top: 100px !important; 
+  }
+
+  .header-content h1 {
+  font-size: 6  0px;
+  font-weight: 700;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Keyframe for the slide-up effect */
+@keyframes revealUp {
+  0% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+
+  
+  100% {
+    transform: translateX(0%);
+    opacity: 1 ;
+  }
+
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -296,26 +373,22 @@ p {
   margin-bottom: 0;
   text-align: left;
 }
-
-
-
 /* --- About Section Polish --- */
 
 /* Make the name stand out like a movie title */
 .about-title {
-  font-family: 'Playfair Display', serif;
-  font-size:44px !important;
+  font-family: 'Montserrat', serif;
+  font-size:40px !important;
   font-weight: 700;
-  color: #faea0c !important; /* Signature Yellow */
-  
-  margin-bottom: 15px !important;
+  color: rgb(173, 233, 63) !important; /* Signature Yellow */
+  margin-bottom: 0px !important;
   letter-spacing: 1px;
 }
-
 /* Fix the "boring" and "overlap" issues */
 .about-heading {
   font-family: 'Playfair Display', serif;
   font-size: 27px !important;
+  margin-top: 5px !important;
   line-height: 1 !important; /* Extra breathing room between lines */
   color: #e0e0e0 !important;   /* Clean off-white */
   text-align: justify;
@@ -343,6 +416,16 @@ p {
     font-size: 16px !important;
     line-height: 1.8 !important;
   }
+
+   .about-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px !important;
+  line-height: 1.1 !important; /* Extra breathing room between lines */
+  color: #e0e0e0 !important;   /* Clean off-white */
+  text-align: justify;
+  letter-spacing: 0em;
+  font-weight: 300;
+  }
 }
 
 
@@ -352,87 +435,269 @@ p {
   box-shadow: 0 0px 60px rgba(255, 146, 4, 0.281); /* Adds depth so the image doesn't look "flat" */
 }
 
-
-
 /*-----------------------------------------------------------------------------------*/
 /*   Services
 /*-----------------------------------------------------------------------------------*/
-
 #services {
-  background: #333d41;
-  position: relative;
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-
-.owl-item {
-  float: left;
-}
-.services-block  {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.services-block img {
-  height: 50px;
-  width: 50px;
- 
-}
-
-.services-block span {
-  margin: 10px 0;
-  position: relative;
-  font-size: 13px;
-  color: #ffffff;
-  letter-spacing: 0.1em;
-  font-weight: 500;
-  text-transform: uppercase;
-  display: block;
-}
-
-.services-block .separator {
-  margin: 0;
-  font-size: 13px;
-  line-height: 22px;
-  text-align: center;
-}
-
-.services-block i {
-  font-size: 44px;
-  color: #b8a07e;
-  line-height: 44px;
-}
-
-
-.services-carousel  .owl-stage-outer {
+  padding-top: 20px;
+  padding-bottom: 0px;
   overflow: hidden;
 }
 
-.services-carousel .owl-dots {
-  margin-top: 5px;
-  text-align: center;
+.services-title {
+  font-family: 'Montserrat', serif;
+  font-size:60px !important;
+  font-weight: 700;
+  color: #ADF13F !important; /* Signature Yellow */
+  margin-bottom: 0px !important;
+}
+/* --- Services Layout with Central Line --- */
+
+.timeline-wrapper {
+  position: relative;
+  padding: 100px 100;
 }
 
-.services-carousel .owl-dot {
-  display: inline-block;
-  margin: 0 5px;
-  width: 12px !important;
-  height: 12px !important;
-  border-radius: 50%;
-  border: 0;
-  padding: 0 !important;
-  background-color: #ddd;
+/* The Vertical Line */
+.central-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 100px; /* Stops before the software section */
+  width: 3px;
+  background: #ADF13F; /* Your signature green */
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.item-row {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+}
+
+.services-img-left, 
+.services-img-right {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0px 60px rgba(86, 160, 16, 0.281); /* Adds depth so the image doesn't look "flat" */
+}
+
+
+.services-text-block h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #FFDA03; /* Yellow for titles */
+  margin-bottom: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+  letter-spacing: 2px;
+}
+
+.services-text-block p {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+.software-title {
+  color: #ADF13F;
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-top: 20px;
+}
+
+.software-list {
+  color: #FFDA03;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 20;
+}
+
+/* Desktop alignment */
+@media (min-width: 768px) {
+  .text-right-desktop {
+    text-align: right;
+  }
+}
+
+/* Mobile: Hide the line or move it to the side */
+@media (max-width: 767px) {
+  .central-line {
+    left: 20px; /* Move line to the left on mobile */
+    bottom: 150px;
+  }
+  .services-text-block {
+    text-align: left;
+    padding-left: 40px;
+    margin-top: 20px;
+  }
+  .text-right-desktop {
+    text-align: left;
+    padding-left: 40px;
+  }
+  .services-img-left, 
+  .services-img-right {
+    max-width: 280px;
+    margin-left: 40px;
+  }
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  portfolio
+/*-----------------------------------------------------------------------------------*/
+#portfolio {/* whole about section*/
+  width: 100%;
+  height: auto;
+  background: #000000;
+  padding-top: 10px;
+  padding-bottom: 10px;
+} 
+.portfolio-title {
+  font-family: 'Montserrat', serif;
+  font-size:50px !important;
+  font-weight: 700;
+  color: rgb(173, 233, 63) !important; /* Signature Yellow */
+  margin-bottom: 10px !important;
+  letter-spacing: 1px;
+}
+.portfolio-title-header {
+  font-family: 'Montserrat', serif;
+  font-size:38px !important;
+  font-weight: 700;
+  color: rgb(231, 245, 38) !important; /* Signature Yellow */
+  margin-bottom: 10px !important;
+  letter-spacing: 1px;
+}
+
+/* --- Portfolio Button Hover & Glow Effects --- */
+
+/* 1. Target the button and ensure the transition is forced */
+#portfolio .portfolio-filter-button {
+  transition: all 0.3s ease-in-out !important;
+  background-color: transparent; /* Starting state */
+  border: 1px solid #FFDA03 !important; /* Matches your yellow theme */
+  color: #f0e4e4 !important;
+}
+
+/* 2. The Hover State with Blue Glow */
+#portfolio .portfolio-filter-button:hover {
+  background-color: #007bff !important; /* Professional Blue */
+  color: #ffffff !important;
+  border-color: #007bff !important;
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.8) !important; /* The Glow */
+  transform: translateY(-3px); /* Lifts the button */
   cursor: pointer;
 }
 
-.services-carousel .owl-dot.active {
-  background-color: #008ba3;
+/* 3. The Active/Selected State */
+#portfolio .portfolio-filter-button.active {
+  background-color: #007bff !important;
+  color: #ffffff !important;
+  border-color: #007bff !important;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5) !important;
 }
 
-.owl-nav {
-  display: none;
+/*-----------------------------------------------------------------------------------*/
+/*  Contact Section
+/*-----------------------------------------------------------------------------------*/
+
+#contact {
+  background-color: #2a2a2a !important;
+  padding-top: 60px; /* Reduced top space to fix the awkward gap */
+  padding-bottom: 80px;
+  border-top: 1px solid #333;
 }
+
+/* Fix 1: Title position and size */
+.section-title h2 {
+  font-size: 32px;      
+  font-weight: 700;    
+  letter-spacing: 2px;
+  margin-bottom: 40px; /* Brings title closer to the address/form */
+  color: #FFDA03;
+  text-align: center;
+}
+
+/* Fix 2: Remove forced Capital Letters from Inputs */
+.contactForm .form-control {
+  background: #222;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 0;
+  padding: 15px;
+  text-transform: none !important; /* This allows small letters/normal typing */
+  height: auto;
+}
+
+.contactForm .form-group {
+  margin-bottom: 20px;
+}
+
+/* Fix 3: Center the text inside the button and center the button itself */
+.btn-send {
+  background: #FFDA03 !important;
+  color: #181818 !important;
+  font-weight: 700;
+  
+  /* Centering the text vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  /* Centering the button in the section */
+  margin: 30px auto 0 auto; 
+  width: 220px;
+  height: 55px; /* Fixed height for a professional look */
+  
+  border-radius: 0;
+  border: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase; /* Keeps button text clean/pro */
+}
+
+.btn-send:hover {
+  background: #fff !important;
+  transform: translateY(-2px);
+}
+
+/* Address detail styling */
+#contact p {
+  color: #f0e4e4;
+  margin-bottom: 15px;
+}
+
+#contact p strong {
+  color: #FFDA03;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* header text animations */
+.reveal-container {
+  overflow: hidden;
+  display: block;
+}
+
+/* The actual animation */
+.reveal-text, .reveal-text-delayed {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  animation: revealUp 1.9s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Delay the second line for a "staggered" look */
+.reveal-text-delayed {
+  animation-delay: 0.8s;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /*  Footer
@@ -516,8 +781,9 @@ p {
   border-radius: 5em;
 }
 
-/* Others */
-
+/*-----------------------------------------------------------------------------------*/
+/*  Other animation
+/*-----------------------------------------------------------------------------------*/
 /* tab fade animation*/
 .tab-pane{
   opacity: 0;
@@ -541,7 +807,6 @@ p {
   will-change: transform, opacity;
 }
 
-
 /* Slide Left: Starting 70px to the left */
 [data-animation="slide-left"] {
   transform: translate3d(-50px, 0, 0);
@@ -564,230 +829,17 @@ p {
 .animate-item:nth-child(2) { transition-delay: 0.4s; }
 .animate-item:nth-child(3) { transition-delay: 0.6s; }
 
-/* --- Portfolio Button Hover & Glow Effects --- */
 
-/* 1. Target the button and ensure the transition is forced */
-#portfolio .portfolio-filter-button {
-  transition: all 0.3s ease-in-out !important;
-  background-color: transparent; /* Starting state */
-  border: 1px solid #FFDA03 !important; /* Matches your yellow theme */
-  color: #f0e4e4 !important;
-}
-
-/* 2. The Hover State with Blue Glow */
-#portfolio .portfolio-filter-button:hover {
-  background-color: #007bff !important; /* Professional Blue */
-  color: #ffffff !important;
-  border-color: #007bff !important;
-  box-shadow: 0 0 20px rgba(0, 123, 255, 0.8) !important; /* The Glow */
-  transform: translateY(-3px); /* Lifts the button */
-  cursor: pointer;
-}
-
-/* 3. The Active/Selected State */
-#portfolio .portfolio-filter-button.active {
-  background-color: #007bff !important;
-  color: #ffffff !important;
-  border-color: #007bff !important;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5) !important;
-}
-
-
-/* --- Contact --- */
-#contact {
-  background-color: #2a2a2a !important;
-  padding-top: 60px; /* Reduced top space to fix the awkward gap */
-  padding-bottom: 80px;
-  border-top: 1px solid #333;
-}
-
-/* Fix 1: Title position and size */
-.section-title h2 {
-  font-size: 32px;      
-  font-weight: 700;    
-  letter-spacing: 2px;
-  margin-bottom: 40px; /* Brings title closer to the address/form */
-  color: #FFDA03;
-  text-align: center;
-}
-
-/* Fix 2: Remove forced Capital Letters from Inputs */
-.contactForm .form-control {
-  background: #222;
-  border: 1px solid #444;
-  color: #fff;
-  border-radius: 0;
-  padding: 15px;
-  text-transform: none !important; /* This allows small letters/normal typing */
-  height: auto;
-}
-
-.contactForm .form-group {
-  margin-bottom: 20px;
-}
-
-/* Fix 3: Center the text inside the button and center the button itself */
-.btn-send {
-  background: #FFDA03 !important;
-  color: #181818 !important;
-  font-weight: 700;
-  
-  /* Centering the text vertically and horizontally */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  
-  /* Centering the button in the section */
-  margin: 30px auto 0 auto; 
-  width: 220px;
-  height: 55px; /* Fixed height for a professional look */
-  
-  border-radius: 0;
-  border: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  text-transform: uppercase; /* Keeps button text clean/pro */
-}
-
-.btn-send:hover {
-  background: #fff !important;
-  transform: translateY(-2px);
-}
-
-/* Address detail styling */
-#contact p {
-  color: #f0e4e4;
-  margin-bottom: 15px;
-}
-
-#contact p strong {
-  color: #FFDA03;
-  font-size: 13px;
-  letter-spacing: 1px;
-}
-
-
-/* Vertical Scrolling Animation */
-.scrolling-wrapper {
-  display: flex !important;
-  align-items: center;
-  gap: 10px; /* Space between 'I am a' and the titles */
-  margin-top: 0px;
-  margin-bottom: 40px;
-}
-
-.static-text {
-  font-size: 27px;
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: 3px;
-  white-space: nowwrap;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);/* drop shadow */
-}
-
-.scroll-window {
-  height: 40px; /* Adjust height to match line-height */
-  overflow: hidden;
-  
-}
-
-.scroll-container {
-  display: flex;
-  flex-direction: column;
-  animation: scroll-up-titles 9s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
-}
-
-.scroll-container span {
-  display: block;
-  height: 40px;
-  line-height: 40px;
-  font-size: 27px;
-  color: rgb(233, 230, 63);/* Signature yellow for the roles */
-  font-weight: 700;
-  text-transform: lowercase;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); /* drop shadow */
-  margin: 0;
-}
-
-@keyframes scroll-up-titles {
-  0%, 25% { transform: translateY(0); }
-  33%, 58% { transform: translateY(-40px); }
-  66%, 91% { transform: translateY(-80px); }
-  100% { transform: translateY(-120px); }
-}
-
-
-/* Mobile Adjustment: Moves text higher */
-@media (max-width: 768px) {
-  .scrolling-wrapper {
-    /* Adjust this number to move it up. 
-       Negative margin pulls the element higher. */
-    margin-top: 0px !important; 
-    margin-bottom: 60px !important; 
-/*     /* Ensures the bottom space is cleared */
-/*     margin-bottom: 30px !important;  */
-  } 
- 
-  .header-content {
-    /* Adjusts the main container's padding to push content up */
-    padding-top: 100px !important; 
-  }
-
-  .header-content h1 {
-  font-size: 25px;
-  font-weight: 700;
-  margin-bottom: 0px;
-  text-transform: uppercase;
-  color: rgb(173, 233, 63);
-  text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.6);
-  }
-
-   .about-heading {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px !important;
-  line-height: 1.1 !important; /* Extra breathing room between lines */
-  color: #e0e0e0 !important;   /* Clean off-white */
-  text-align: justify;
-  letter-spacing: 0em;
-  font-weight: 300;
-  }
-}
-
-/* header text animations */
-.reveal-container {
-  overflow: hidden;
-  display: block;
-}
-
-/* The actual animation */
-.reveal-text, .reveal-text-delayed {
-  display: inline-block;
-  transform: translateY(110%);
+/*Simple Fade in starting state */
+[data-animation = "fade"] {
   opacity: 0;
-  animation: revealUp 1.9s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  transform: translateY(-25px);
+  transition: opacity 1.2s ease-out;
+  transform: 1.2s ease-out;
 }
-
-/* Delay the second line for a "staggered" look */
-.reveal-text-delayed {
-  animation-delay: 0.8s;
+/*Active state triggered by js*/
+[data-animation ="fade"].active {
+  opacity: 1;
+  transform: translateY(0)
 }
-
-/* Keyframe for the slide-up effect */
-@keyframes revealUp {
-  0% {
-    transform: translateX(120%);
-    opacity: 0;
-  }
-
-  
-  100% {
-    transform: translateX(0%);
-    opacity: 1 ;
-  }
-
-}
-
-
-
 
